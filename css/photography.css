@@ -407,16 +407,11 @@ footer {
     }
 }
 .carousel-track {
-    animation-play-state: paused;
-}
-
-body.carousel-ready .carousel-track {
-    animation-play-state: running;
-}
-.carousel-track {
     display: flex;
     gap: 1.5rem;
-    animation: scroll 30s linear infinite;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;  /* Start paused */
 }
 
 .carousel-track::after {
@@ -424,11 +419,44 @@ body.carousel-ready .carousel-track {
     display: block;
     width: 100%;
 }
-.carousel-track img {
-    filter: blur(10px);
-    transition: filter 0.3s;
+
+body.carousel-ready .carousel-track {
+    animation-play-state: running;  /* Start when ready */
 }
 
-.carousel-track img.loaded {
-    filter: blur(0);
+.carousel-track-1 {
+    animation: scrollRight 60s linear infinite;
+}
+
+.carousel-track-2 {
+    animation: scrollLeft 60s linear infinite;
+}
+
+.carousel-track-3 {
+    animation: scrollRight 60s linear infinite;
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.carousel-track img {
+    width: 400px;
+    height: 250px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
