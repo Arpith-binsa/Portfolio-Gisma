@@ -406,3 +406,21 @@ footer {
         text-align: center;
     }
 }
+.carousel-track {
+    animation-play-state: paused;
+}
+
+body.carousel-ready .carousel-track {
+    animation-play-state: running;
+}
+.carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: scroll 30s linear infinite;
+}
+
+.carousel-track::after {
+    content: "";
+    display: block;
+    width: 100%;
+}

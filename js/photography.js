@@ -70,3 +70,25 @@ document.querySelectorAll('.album-card').forEach(card => {
     card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(card);
 });
+function imagesLoaded(parentNode) {
+    const imgElements = parentNode.querySelectorAll("img");
+    const promises = [];
+    imgElements.forEach((img) => {
+        if (img.complete) return;
+        promises.push(new Promise((resolve) => {
+            img.onload = img.onerror = resolve;
+        }));
+    });
+    return Promise.all(promises);
+}
+loadCarouselImages();
+
+Promise.all([
+    imagesLoaded(document.querySelector('.carousel-track-1')),
+    imagesLoaded(document.querySelector('.carousel-track-2')),
+    imagesLoaded(document.querySelector('.carousel-track-3')),
+]).then(() => {
+    document.body.classList.add("carousel-ready");
+});
+
+// Ensure animations trigger after images are loaded 
