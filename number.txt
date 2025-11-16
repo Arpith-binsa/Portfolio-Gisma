@@ -1,0 +1,31 @@
+╔══════════════════════════════════════════════════════════════╗
+║            PHOTO NUMBERING CHEAT SHEET                       ║
+╚══════════════════════════════════════════════════════════════╝
+
+📁 FOLDER: assets/images/
+
+🔢 ALBUM 1 - BLAU-WEISS (Football)
+   Photos: 1.jpg → 100.jpg
+   Carousel: Track 1
+   
+🔢 ALBUM 2 - GISMA FC (Football)  
+   Photos: 101.jpg → 200.jpg
+   Carousel: Track 1
+
+🔢 ALBUM 3 - FASHION
+   Photos: 201.jpg → 300.jpg
+   Carousel: Track 3
+
+🔢 ALBUM 4 - PERSONAL WORK
+   Photos: 301.jpg → 400.jpg
+   Carousel: Track 2
+
+══════════════════════════════════════════════════════════════
+
+🎯 CAROUSEL TRACKS:
+
+Track 1 (Top) = Photos 1-200 (Both football albums)
+Track 2 (Middle) = Photos 301-400 (Personal)  
+Track 3 (Bottom) = Photos 201-300 (Fashion)
+
+══════════════════════════════════════════════════════════════
