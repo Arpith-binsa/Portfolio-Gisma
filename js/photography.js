@@ -92,3 +92,6 @@ Promise.all([
 });
 
 // Ensure animations trigger after images are loaded 
+img.addEventListener('load', function() {
+    this.classList.add('loaded');
+});

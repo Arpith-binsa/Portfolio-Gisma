@@ -424,3 +424,11 @@ body.carousel-ready .carousel-track {
     display: block;
     width: 100%;
 }
+.carousel-track img {
+    filter: blur(10px);
+    transition: filter 0.3s;
+}
+
+.carousel-track img.loaded {
+    filter: blur(0);
+}
