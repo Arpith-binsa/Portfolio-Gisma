@@ -406,20 +406,3 @@ footer {
         text-align: center;
     }
 }
-/* Image Optimization */
-.optimized-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    image-rendering: auto;
-
-    /* Prevent layout jank */
-    display: block;
-
-    /* GPU acceleration for smoother scroll */
-    transform: translateZ(0);
-
-    /* Helps Chrome decode images faster */
-    will-change: transform;
-}
-
