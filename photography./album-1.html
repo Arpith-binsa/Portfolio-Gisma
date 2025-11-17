@@ -204,21 +204,21 @@
     </style>
 </head>
 <body>
-    <a href="../portfolio.html" class="back-button">
+    <a href="../index.html" class="back-button">
         <svg viewBox="0 0 24 24">
             <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
         </svg>
     </a>
 
     <div class="hero-image">
-        <img src="../assets/images/1.jpg" alt="Blau-Weiss Friedrichshain">
+        <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/1.jpg" alt="Blau-Weiss Friedrichshain">
         <div class="hero-overlay">
             <h1 class="album-title">BLAU-WEISS 19/10</h1>
             <p class="album-date">Oct 28–29</p>
             <div class="share-info">
                 <div class="share-badge">
                     <span>📷</span>
-                    <span>Shared</span>
+                    <span>67 Photos</span>
                 </div>
             </div>
         </div>
@@ -243,18 +243,27 @@
         const startNum = 1;
         const endNum = 100;
         
-        for (let i = startNum; i <= endNum; i++) {
-            const gridItem = document.createElement('div');
-            gridItem.className = 'grid-item';
-            
-            const img = document.createElement('img');
-            img.src = `../assets/images/${i}.jpg`;
-            img.alt = `Photo ${i}`;
-            img.onerror = function() { gridItem.style.display = 'none'; };
-            
-            gridItem.appendChild(img);
-            photoContainer.appendChild(gridItem);
-        }
+        const cloudinaryBase = 'https://res.cloudinary.com/du0tvwlwp/image/upload/';
+
+for (let i = startNum; i <= endNum; i++) {
+    const gridItem = document.createElement('div');
+    gridItem.className = 'grid-item';
+    
+    const img = document.createElement('img');
+    // Low quality for grid (1-65)
+    img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/${i}.jpg`;
+    img.alt = `Photo ${i}`;
+    img.loading = 'lazy';
+    
+    // High quality URL (1001-1065)
+    const highQualityNum = 1000 + i;
+    img.dataset.fullUrl = `${cloudinaryBase}q_90,f_jpg/${highQualityNum}.jpg`;
+    
+    img.onerror = function() { gridItem.style.display = 'none'; };
+    
+    gridItem.appendChild(img);
+    photoContainer.appendChild(gridItem);
+}
 
         // Lightbox
         let currentIndex = 0;
@@ -266,7 +275,7 @@
             gridItems.forEach((img, index) => {
                 img.addEventListener('click', () => {
                     currentIndex = index;
-                    lightboxImg.src = img.src;
+                    lightboxImg.src = img.dataset.fullUrl;
                     lightbox.classList.add('active');
                 });
             });
@@ -281,7 +290,7 @@
             currentIndex += direction;
             if (currentIndex < 0) currentIndex = gridItems.length - 1;
             if (currentIndex >= gridItems.length) currentIndex = 0;
-            lightboxImg.src = gridItems[currentIndex].src;
+            lightboxImg.src = gridItems[currentIndex].dataset.fullUrl;
         }
 
         lightbox.addEventListener('click', (e) => {
