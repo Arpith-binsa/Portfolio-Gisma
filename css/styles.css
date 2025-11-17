@@ -353,23 +353,22 @@ nav {
     margin: 0 auto;
 }
 
+
 .contact-text h2 {
     font-size: 4rem;
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-text p {
     font-size: 1.2rem;
     color: #e0e0e0;
     line-height: 1.8;
-}
-
-.contact-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .contact-form-container {
