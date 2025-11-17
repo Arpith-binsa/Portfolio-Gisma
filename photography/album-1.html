@@ -239,24 +239,25 @@
 
     <script>
         // AUTO-GENERATE IMAGES 1-100
-        const photoContainer = document.getElementById('photoContainer');
-        const startNum = 1;
-        const endNum = 100;
-        
-        const cloudinaryBase = 'https://res.cloudinary.com/du0tvwlwp/image/upload/';
+   // AUTO-GENERATE IMAGES 1-100
+const photoContainer = document.getElementById('photoContainer');
+const startNum = 1;
+const endNum = 97;
+const cloudinaryBase = 'https://res.cloudinary.com/du0tvwlwp/image/upload/';
 
 for (let i = startNum; i <= endNum; i++) {
     const gridItem = document.createElement('div');
     gridItem.className = 'grid-item';
     
     const img = document.createElement('img');
-    // Low quality for grid (1-65)
-    img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/${i}.jpg`;
+    const highQualityNum = 1000 + i;
+    
+    // Low quality thumbnail for grid (auto-compressed by Cloudinary)
+    img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/v1763400745/${highQualityNum}.jpg`;
     img.alt = `Photo ${i}`;
     img.loading = 'lazy';
     
-    // High quality URL (1001-1065)
-    const highQualityNum = 1000 + i;
+    // High quality for lightbox (full resolution)
     img.dataset.fullUrl = `${cloudinaryBase}v1763400745/${highQualityNum}.jpg`;
     
     img.onerror = function() { gridItem.style.display = 'none'; };
