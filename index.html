@@ -989,8 +989,59 @@
             }, 100);
         }
 
-        // Load carousel images on page load
+ // Load carousel images on page load
         loadCarouselImages();
+
+        // Email button click handler with clipboard copy
+        document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
+            const email = 'arpithbinsa.photography@gmail.com';
+            
+            // Copy email to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                // Show "Email copied" message after 1 second
+                setTimeout(() => {
+                    // Create toast notification
+                    const toast = document.createElement('div');
+                    toast.textContent = '📧 Email copied to clipboard!';
+                    toast.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        background: #ff3b30;
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        font-weight: 700;
+                        z-index: 10000;
+                        animation: slideIn 0.3s ease;
+                    `;
+                    
+                    // Add animation
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes slideIn {
+                            from { transform: translateX(400px); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                        @keyframes slideOut {
+                            from { transform: translateX(0); opacity: 1; }
+                            to { transform: translateX(400px); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    document.body.appendChild(toast);
+                    
+                    // Remove toast after 3 seconds
+                    setTimeout(() => {
+                        toast.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => toast.remove(), 300);
+                    }, 3000);
+                }, 1000);
+            }).catch(err => {
+                console.error('Failed to copy email:', err);
+            });
+        });
     </script>
 </body>
 </html>
