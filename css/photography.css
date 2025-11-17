@@ -411,7 +411,8 @@ footer {
     gap: 1.5rem;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-play-state: paused;  /* Start paused */
+    animation-play-state: paused;
+    will-change: transform;
 }
 
 .carousel-track::after {
@@ -421,35 +422,35 @@ footer {
 }
 
 body.carousel-ready .carousel-track {
-    animation-play-state: running;  /* Start when ready */
+    animation-play-state: running;
 }
 
 .carousel-track-1 {
-    animation: scrollRight 60s linear infinite;
+    animation: scrollRight 120s linear infinite;
 }
 
 .carousel-track-2 {
-    animation: scrollLeft 60s linear infinite;
+    animation: scrollLeft 80s linear infinite;
 }
 
 .carousel-track-3 {
-    animation: scrollRight 60s linear infinite;
+    animation: scrollRight 120s linear infinite;
 }
 
 @keyframes scrollRight {
-    0% {
+    from {
         transform: translateX(0);
     }
-    100% {
-        transform: translateX(-50%);
+    to {
+        transform: translateX(-100%);
     }
 }
 
 @keyframes scrollLeft {
-    0% {
-        transform: translateX(-50%);
+    from {
+        transform: translateX(-100%);
     }
-    100% {
+    to {
         transform: translateX(0);
     }
 }
