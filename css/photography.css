@@ -461,3 +461,6 @@ body.carousel-ready .carousel-track {
     object-fit: cover;
     flex-shrink: 0;
 }
+.carousel-track {
+    animation-play-state: running !important;
+}
