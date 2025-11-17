@@ -137,7 +137,7 @@
         }
 
         @media (max-width: 768px) {
-            .grid-container { column-count: 2; column-gap: 2px; padding: 2px; }
+            .grid-container { column-count: 3; column-gap: 2px; padding: 2px; }
             .grid-item { margin-bottom: 2px; }
             .album-title { font-size: 2rem; }
             .hero-overlay { padding: 2rem 1.5rem; }
@@ -242,7 +242,7 @@
    // AUTO-GENERATE IMAGES 1-100
 const photoContainer = document.getElementById('photoContainer');
 const startNum = 1;
-const endNum = 98;
+const endNum = 100;
 const cloudinaryBase = 'https://res.cloudinary.com/du0tvwlwp/image/upload/';
 
 for (let i = startNum; i <= endNum; i++) {
@@ -253,12 +253,12 @@ for (let i = startNum; i <= endNum; i++) {
     const highQualityNum = 1000 + i;
     
     // Low quality thumbnail for grid (auto-compressed by Cloudinary)
-    img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/v1763400745/${highQualityNum}.jpg`;
+    img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/${highQualityNum}.jpg`;
     img.alt = `Photo ${i}`;
     img.loading = 'lazy';
     
     // High quality for lightbox (full resolution)
-    img.dataset.fullUrl = `${cloudinaryBase}v1763400745/${highQualityNum}.jpg`;
+    img.dataset.fullUrl = `${cloudinaryBase}${highQualityNum}.jpg`;
     
     img.onerror = function() { gridItem.style.display = 'none'; };
     
