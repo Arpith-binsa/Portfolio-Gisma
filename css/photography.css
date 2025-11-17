@@ -263,22 +263,11 @@ nav {
     position: relative;
     padding: 3rem;
     border-radius: 20px;
-    overflow: hidden;
-}
-
-.contact-text::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     background-image: url('https://res.cloudinary.com/du0tvwlwp/image/upload/c_fill,w_600,h_600,g_face,ar_1:1/v1763416728/bg-masthead_ahw1ui.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.1;
-    border-radius: 20px;
-    z-index: -1;
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.92);
 }
 
 .contact-text h2 {
