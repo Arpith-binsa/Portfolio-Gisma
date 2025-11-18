@@ -202,6 +202,46 @@
 
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
+        /* Mobile Responsive - Smaller Images */
+@media (max-width: 768px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+        padding: 1rem !important;
+    }
+    
+    .photo-item {
+        height: 180px !important;
+    }
+    
+    .photo-item img {
+        object-fit: cover !important;
+    }
+    
+    .albums-section {
+        padding: 2rem 1rem !important;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem !important;
+    }
+    
+    .section-header p {
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.3rem !important;
+        padding: 0.5rem !important;
+    }
+    
+    .photo-item {
+        height: 150px !important;
+    }
+}
     </style>
 </head>
 <body>
