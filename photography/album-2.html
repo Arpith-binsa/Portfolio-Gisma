@@ -202,16 +202,17 @@
 
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
-        /* Mobile Responsive - Smaller Images */
+        /* Mobile Responsive - Compact Grid Like Photos App */
 @media (max-width: 768px) {
     .photo-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.5rem !important;
-        padding: 1rem !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.2rem !important;
+        padding: 0.5rem !important;
     }
     
     .photo-item {
-        height: 180px !important;
+        height: 120px !important;
+        border-radius: 2px !important;
     }
     
     .photo-item img {
@@ -219,29 +220,43 @@
     }
     
     .albums-section {
-        padding: 2rem 1rem !important;
+        padding: 1rem 0.5rem !important;
+    }
+    
+    .section-header {
+        padding: 1rem !important;
     }
     
     .section-header h2 {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
     }
     
     .section-header p {
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    nav {
+        padding: 1rem 1rem !important;
+    }
+    
+    .nav-links {
+        gap: 1rem !important;
+        font-size: 0.75rem !important;
     }
 }
 
 @media (max-width: 480px) {
     .photo-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.3rem !important;
-        padding: 0.5rem !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.15rem !important;
+        padding: 0.3rem !important;
     }
     
     .photo-item {
-        height: 150px !important;
+        height: 110px !important;
     }
 }
+ 
     </style>
 </head>
 <body>
