@@ -2,31 +2,7 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/x-icon" href="./favicon.png">
-    <!-- Preload carousel images -->
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/1.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/2.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/3.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/4.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/5.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/6.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/7.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/8.jpg">
 
-<!-- Track 2 -->
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/301.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/302.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/303.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/304.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/305.jpg">
-
-<!-- Track 3 -->
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/201.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/202.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/203.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/204.jpg">
-<link rel="preload" as="image" href="https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto,w_800/205.jpg">
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARPITH - Photography Portfolio</title>
@@ -973,125 +949,138 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         }); 
-        // Make carousel images clickable
-        // Track 1 (Football) - clicks go to photography/album-1.html
-        document.querySelectorAll('.carousel-track-1 img').forEach(img => {
+
+// LOAD CAROUSEL IMAGES FROM ASSETS FOLDER
+function loadCarouselImages() {
+    // Track 1: Photos 1000-1100 (Sports)
+    const track1 = document.querySelector('.carousel-track-1');
+    
+    for (let i = 1000; i <= 1100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 1000; i <= 1100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
+
+    // Track 2: Photos 3000-3100 (Personal)
+    const track2 = document.querySelector('.carousel-track-2');
+    for (let i = 3000; i <= 3100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 3000; i <= 3100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
+
+    // Track 3: Photos 4000-4100 (Fashion)
+    const track3 = document.querySelector('.carousel-track-3');
+    for (let i = 4000; i <= 4100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 4000; i <= 4100; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.dataset.hd = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_auto,q_auto/${i}.jpg`;
+        img.loading = "lazy";
+        img.width = 400;
+        img.height = 250;
+        img.alt = `Photo ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
+
+    // Add lightbox click handlers
+    setTimeout(() => {
+        document.querySelectorAll('.carousel-track img').forEach(img => {
             img.addEventListener('click', () => {
-                window.location.href = 'photography/album-1.html';
+                openLightbox(img.dataset.hd);
             });
         });
+    }, 100);
+}
 
-        // Track 2 (Personal) - clicks go to photography/album-4.html
-        document.querySelectorAll('.carousel-track-2 img').forEach(img => {
-            img.addEventListener('click', () => {
-                window.location.href = 'photography/album-4.html';
-            });
-        });
-
-        // Track 3 (Fashion) - clicks go to photography/album-3.html
-        document.querySelectorAll('.carousel-track-3 img').forEach(img => {
-            img.addEventListener('click', () => {
-                window.location.href = 'photography/album-3.html';
-            });
-        });
-
-        // LOAD CAROUSEL IMAGES FROM ASSETS FOLDER
-        function loadCarouselImages() {
-            // Track 1: Photos 1-200 (Blau-Weiss + Gisma)
-            const track1 = document.querySelector('.carousel-track-1');
-            
-            for (let i = 1000; i <= 1100; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track1.appendChild(img);
-            }
-            // Duplicate for seamless loop
-            for (let i = 1000; i <= 1100; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track1.appendChild(img);
-            }
-
-            // Track 2: Photos 301-400 (Personal)
-            const track2 = document.querySelector('.carousel-track-2');
-            for (let i = 301; i <= 322; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track2.appendChild(img);
-            }
-            // Duplicate for seamless loop
-            for (let i = 301; i <= 322; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track2.appendChild(img);
-            }
-
-            // Track 3: Photos 201-300 (Fashion)
-            const track3 = document.querySelector('.carousel-track-3');
-            for (let i = 201; i <= 247; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track3.appendChild(img);
-            }
-            // Duplicate for seamless loop
-            for (let i = 201; i <= 247; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.width = 400;
-                img.height = 250;
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track3.appendChild(img);
-            }
-
-            // After loading, add click handlers
-            setTimeout(() => {
-                document.querySelectorAll('.carousel-track-1 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-1.html';
-                    });
-                });
-                document.querySelectorAll('.carousel-track-2 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-4.html';
-                    });
-                });
-                document.querySelectorAll('.carousel-track-3 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-3.html';
-                    });
-                });
-            }, 100);
+// Lightbox function
+function openLightbox(imageSrc) {
+    const lightbox = document.createElement('div');
+    lightbox.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        cursor: zoom-out;
+    `;
+    
+    const img = document.createElement('img');
+    img.src = imageSrc;
+    img.style.cssText = `
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+    `;
+    
+    lightbox.addEventListener('click', () => lightbox.remove());
+    
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            lightbox.remove();
+            document.removeEventListener('keydown', escHandler);
         }
+    });
+    
+    lightbox.appendChild(img);
+    document.body.appendChild(lightbox);
+}
 
- // Load carousel images on page load
-        loadCarouselImages();
+loadCarouselImages();
 
         // Email button click handler with clipboard copy
         document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
