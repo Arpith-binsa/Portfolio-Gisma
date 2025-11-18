@@ -202,58 +202,58 @@
 
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
-        /* Mobile Responsive - Compact Grid Like Photos App */
+      /* MOBILE FIX - Compact Grid */
 @media (max-width: 768px) {
-    .photo-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 0.2rem !important;
-        padding: 0.5rem !important;
+    .grid-container {
+        column-count: 3 !important;
+        column-gap: 2px !important;
+        padding: 2px !important;
     }
     
-    .photo-item {
-        height: 120px !important;
-        border-radius: 2px !important;
+    .grid-item {
+        margin-bottom: 2px !important;
     }
     
-    .photo-item img {
-        object-fit: cover !important;
+    .grid-item img {
+        border-radius: 0 !important;
     }
     
-    .albums-section {
-        padding: 1rem 0.5rem !important;
+    .album-title {
+        font-size: 2rem !important;
     }
     
-    .section-header {
-        padding: 1rem !important;
+    .hero-overlay {
+        padding: 2rem 1rem !important;
     }
     
-    .section-header h2 {
-        font-size: 1.8rem !important;
-    }
-    
-    .section-header p {
-        font-size: 0.85rem !important;
-    }
-    
-    nav {
-        padding: 1rem 1rem !important;
-    }
-    
-    .nav-links {
-        gap: 1rem !important;
-        font-size: 0.75rem !important;
+    .back-button {
+        width: 40px !important;
+        height: 40px !important;
     }
 }
 
 @media (max-width: 480px) {
-    .photo-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 0.15rem !important;
-        padding: 0.3rem !important;
+    .grid-container {
+        column-count: 3 !important;
+        column-gap: 1px !important;
+        padding: 1px !important;
     }
     
-    .photo-item {
-        height: 110px !important;
+    .grid-item {
+        margin-bottom: 1px !important;
+    }
+    
+    .album-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .album-date {
+        font-size: 0.9rem !important;
+    }
+    
+    .share-badge {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.8rem !important;
     }
 }
  
