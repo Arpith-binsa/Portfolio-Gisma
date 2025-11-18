@@ -128,7 +128,7 @@
 
         .hero h1 .word:nth-child(1) { animation-delay: 0.1s; }
         .hero h1 .word:nth-child(2) { animation-delay: 0.2s; }
-        .hero h1 .word:nth-child(3) { animation-delay: 0.3s; }
+        .hero h1 .word:nth-child(3) { animation-delay: 0.3s; color: #ff3b30;}
         .hero h1 .word:nth-child(4) { animation-delay: 0.4s; color: #ff3b30; }
         .hero h1 .word:nth-child(5) { animation-delay: 0.5s; }
 
@@ -734,9 +734,8 @@
     <section class="hero">
         <h1>
             <span class="word">CAPTURING</span>
-            <span class="word">MOMENTS</span>
-            <span class="word">WORTH</span>
-            <span class="word">REMEMBERING</span>
+            <span class="word">THE</span>
+            <span class="word">MOMENT</span>
         </h1>
         <p>Sports. Fashion. Life. Through My lens.</p>
     </section>
@@ -883,6 +882,11 @@
             <span>📷 Instagram</span>
             <span>→</span>
         </a>
+
+        <a href="contact.html" class="contact-btn">
+            <span>💬 Contact Form</span>
+            <span>→</span>
+        </a>
     </div>
 </section>
 
@@ -996,7 +1000,7 @@
             // Track 1: Photos 1-200 (Blau-Weiss + Gisma)
             const track1 = document.querySelector('.carousel-track-1');
             
-            for (let i = 1; i <= 65; i++) {
+            for (let i = 1000; i <= 1100; i++) {
                 const img = document.createElement('img');
                 img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
                 img.loading = "lazy";
@@ -1007,7 +1011,7 @@
                 track1.appendChild(img);
             }
             // Duplicate for seamless loop
-            for (let i = 1; i <= 65; i++) {
+            for (let i = 1000; i <= 1100; i++) {
                 const img = document.createElement('img');
                 img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
                 img.loading = "lazy";
