@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/x-icon" href="./favicon.png">
-    <!-- Google reCAPTCHA Script -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Google reCAPTCHA v3 Script -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfy3xEsAAAAAM_rqF-HlLpmd4oqA1FzPP2fecc4"></script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -164,6 +164,21 @@
             font-weight: 400;
         }
 
+        /* Cat verification box */
+        .cat-verification {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #333;
+        }
+
+        .cat-verification p {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
         .submit-btn {
             display: flex;
             align-items: center;
@@ -231,6 +246,11 @@
             text-align: center;
         }
 
+        /* Hide reCAPTCHA v3 badge */
+        .grecaptcha-badge { 
+            visibility: hidden; 
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav {
@@ -254,20 +274,7 @@
                 font-size: 1.2rem;
                 padding: 1.5rem;
             }
-            
-            /* Stack captcha on mobile */
-            .captcha-wrapper {
-                flex-direction: column !important;
-                align-items: flex-start !important;
-            }
         }
-
-        /* reCAPTCHA styling */
-        .g-recaptcha {
-            flex-shrink: 0;
-        }
-        .grecaptcha-badge {
-             visibility: hidden; }
     </style>
 </head>
 <body>
@@ -312,28 +319,13 @@
 
                 <div class="form-group">
                     <label>Human Verification *</label>
-                    
-                    <div class="captcha-wrapper" style="display: flex; align-items: center; gap: 1rem; background: #1a1a1a; padding: 1.5rem; border-radius: 8px;">
-                        <!-- Google reCAPTCHA -->
-                        <div class="g-recaptcha" 
-                             data-sitekey="6Leb1hEsAAAAAPzFfp5rHU3sbk28FN4D8PWKGB_R" 
-                             data-theme="dark"
-                             data-size="compact">
-                        </div>
-                        
-                        <!-- Your text -->
-                        <span style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
-                            I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat 🐱🐱🐱
-                        </span>
+                    <div class="cat-verification">
+                        <p>I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat 🐱🐱🐱</p>
                     </div>
-                    <small style="color: #666; font-size: 0.8rem;">
-    This site is protected by reCAPTCHA and the Google 
-    <a href="https://policies.google.com/privacy" style="color: #ff3b30;">Privacy Policy</a> and 
-    <a href="https://policies.google.com/terms" style="color: #ff3b30;">Terms of Service</a> apply.
-</small>
+                    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                 </div>
 
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="submit-btn" id="submitBtn">
                     <span>SEND MESSAGE</span>
                     <span>→</span>
                 </button>
@@ -347,22 +339,34 @@
     </section>
 
     <!-- Footer -->
-    
     <footer>
         <div>ARPITH BINSA © 2025</div>
+        <small style="color: #666; font-size: 0.8rem; margin-top: 1rem; display: block;">
+            This site is protected by reCAPTCHA and the Google 
+            <a href="https://policies.google.com/privacy" style="color: #ff3b30;">Privacy Policy</a> and 
+            <a href="https://policies.google.com/terms" style="color: #ff3b30;">Terms of Service</a> apply.
+        </small>
     </footer>
 
-    <!-- Validation Script -->
+    <!-- reCAPTCHA v3 Script -->
     <script>
-    // Validate reCAPTCHA before form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-        const recaptchaResponse = grecaptcha.getResponse();
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
         
-        if (!recaptchaResponse || recaptchaResponse.length === 0) {
-            e.preventDefault();
-            alert('Please verify you are human by checking the box! 🐱');
-            return false;
-        }
+        // Disable button during submission
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>VERIFYING...</span>';
+        
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Lfy3xEsAAAAAM_rqF-HlLpmd4oqA1FzPP2fecc4', {action: 'submit'}).then(function(token) {
+                // Add token to form
+                document.getElementById('g-recaptcha-response').value = token;
+                
+                // Submit form
+                document.getElementById('contactForm').submit();
+            });
+        });
     });
     </script>
 </body>
