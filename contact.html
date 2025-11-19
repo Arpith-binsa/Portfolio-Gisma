@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Google reCAPTCHA Script -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <head>
 <link rel="icon" type="image/x-icon" href="./favicon.png">
+    <!-- Google reCAPTCHA Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - ARPITH</title>
@@ -163,49 +164,6 @@
             font-weight: 400;
         }
 
-        /* Captcha Container */
-        .captcha-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            padding: 1.5rem;
-            background: #1a1a1a;
-            border-radius: 8px;
-        }
-
-        .captcha-text {
-            flex: 1;
-        }
-
-        .captcha-text label {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            font-size: 1rem;
-            color: #e0e0e0;
-        }
-
-        .captcha-text input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .captcha-image {
-            flex-shrink: 0;
-        }
-
-        .captcha-image img {
-            display: block;
-            filter: brightness(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .captcha-image img:hover {
-            transform: scale(1.05);
-        }
-
         .submit-btn {
             display: flex;
             align-items: center;
@@ -296,56 +254,21 @@
                 font-size: 1.2rem;
                 padding: 1.5rem;
             }
+            
+            /* Stack captcha on mobile */
+            .captcha-wrapper {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
         }
-        /* Hide reCAPTCHA branding, show only checkbox */
-.g-recaptcha {
-    transform: scale(0.9);
-    transform-origin: 0 0;
-}
 
-/* Style the container to look like your old checkbox */
-.captcha-container .g-recaptcha > div {
-    display: flex;
-    align-items: center;
-}
-
-/* Attempt to hide the logo (Google makes this hard) */
-iframe[src*="recaptcha"] {
-    border-radius: 4px;
-}
-
-/* Alternative: Create a custom checkbox wrapper */
-.custom-captcha-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 8px;
-}
-
-.custom-captcha-text {
-    flex: 1;
-    color: #e0e0e0;
-    font-size: 1rem;
-    line-height: 1.6;
-}
+        /* reCAPTCHA styling */
+        .g-recaptcha {
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
-    <script>
-// Prevent form submission if reCAPTCHA not completed
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    const recaptchaResponse = grecaptcha.getResponse();
-    
-    if (recaptchaResponse.length === 0) {
-        e.preventDefault();
-        alert('Please complete the reCAPTCHA verification!');
-        return false;
-    }
-});
-</script>
-
     <!-- Navigation -->
     <nav>
         <a href="index.html" class="logo">ARPITH</a>
@@ -384,24 +307,24 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label>Human Verification *</label>
                     
-                    <div class="form-group">
-    <label>Human Verification *</label>
-    
-    <div class="captcha-container" style="flex-direction: column; align-items: flex-start; gap: 1rem;">
-        <div class="captcha-text">
-            <p style="color: #e0e0e0; margin: 0; line-height: 1.6; font-size: 1rem;">
-                I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat.
-            </p>
-        </div>
-        
-        <!-- Google reCAPTCHA -->
-        <div class="g-recaptcha" 
-             data-sitekey="6Leb1hEsAAAAAPzFfp5rHU3sbk28FN4D8PWKGB_R" 
-             data-theme="dark">
-        </div>
-    </div>
-</div>
+                    <div class="captcha-wrapper" style="display: flex; align-items: center; gap: 1rem; background: #1a1a1a; padding: 1.5rem; border-radius: 8px;">
+                        <!-- Google reCAPTCHA -->
+                        <div class="g-recaptcha" 
+                             data-sitekey="6Leb1hEsAAAAAPzFfp5rHU3sbk28FN4D8PWKGB_R" 
+                             data-theme="dark"
+                             data-size="compact">
+                        </div>
+                        
+                        <!-- Your text -->
+                        <span style="color: #e0e0e0; font-size: 0.95rem; line-height: 1.5;">
+                            I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat 🐱🐱🐱
+                        </span>
+                    </div>
+                </div>
 
                 <button type="submit" class="submit-btn">
                     <span>SEND MESSAGE</span>
@@ -420,5 +343,19 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     <footer>
         <div>ARPITH BINSA © 2025</div>
     </footer>
+
+    <!-- Validation Script -->
+    <script>
+    // Validate reCAPTCHA before form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        const recaptchaResponse = grecaptcha.getResponse();
+        
+        if (!recaptchaResponse || recaptchaResponse.length === 0) {
+            e.preventDefault();
+            alert('Please verify you are human by checking the box! 🐱');
+            return false;
+        }
+    });
+    </script>
 </body>
 </html>
