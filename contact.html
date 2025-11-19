@@ -164,19 +164,54 @@
             font-weight: 400;
         }
 
-        /* Cat verification box */
-        .cat-verification {
+        /* Verification box */
+        .verification-box {
             background: #1a1a1a;
             padding: 1.5rem;
             border-radius: 8px;
             border: 2px solid #333;
         }
 
-        .cat-verification p {
+        .verification-box label {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .verification-box input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.2rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: #ff3b30;
+        }
+
+        .verification-box span {
+            flex: 1;
             color: #e0e0e0;
-            font-size: 0.95rem;
             line-height: 1.6;
-            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .verification-box .recaptcha-notice {
+            color: #888;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            line-height: 1.4;
+        }
+
+        .verification-box .recaptcha-notice a {
+            color: #ff3b30;
+            text-decoration: none;
+        }
+
+        .verification-box .recaptcha-notice a:hover {
+            text-decoration: underline;
         }
 
         .submit-btn {
@@ -319,8 +354,16 @@
 
                 <div class="form-group">
                     <label>Human Verification *</label>
-                    <div class="cat-verification">
-                        <p>I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat 🐱🐱🐱</p>
+                    <div class="verification-box">
+                        <label>
+                            <input type="checkbox" id="human-check" name="human-check" required>
+                            <span>I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat.</span>
+                        </label>
+                        <div class="recaptcha-notice">
+                            This site is protected by reCAPTCHA and the Google 
+                            <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and 
+                            <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
+                        </div>
                     </div>
                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                 </div>
@@ -341,11 +384,6 @@
     <!-- Footer -->
     <footer>
         <div>ARPITH BINSA © 2025</div>
-        <small style="color: #666; font-size: 0.8rem; margin-top: 1rem; display: block;">
-            This site is protected by reCAPTCHA and the Google 
-            <a href="https://policies.google.com/privacy" style="color: #ff3b30;">Privacy Policy</a> and 
-            <a href="https://policies.google.com/terms" style="color: #ff3b30;">Terms of Service</a> apply.
-        </small>
     </footer>
 
     <!-- reCAPTCHA v3 Script -->
