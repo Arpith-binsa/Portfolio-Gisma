@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Google reCAPTCHA Script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <head>
 <link rel="icon" type="image/x-icon" href="./favicon.png">
     <meta charset="UTF-8">
@@ -336,19 +338,24 @@
                     <label for="message">Message *</label>
                     <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label>Human Verification *</label>
                     
-                    <div class="captcha-container">
-                        <div class="captcha-text">
-                            <label>
-                                <input type="checkbox" name="human-check" required>
-                                <span>I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                    <div class="form-group">
+    <label>Human Verification *</label>
+    
+    <div class="captcha-container" style="flex-direction: column; align-items: flex-start; gap: 1rem;">
+        <div class="captcha-text">
+            <p style="color: #e0e0e0; margin: 0; line-height: 1.6; font-size: 1rem;">
+                I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat.
+            </p>
+        </div>
+        
+        <!-- Google reCAPTCHA -->
+        <div class="g-recaptcha" 
+             data-sitekey="6Leb1hEsAAAAAPzFfp5rHU3sbk28FN4D8PWKGB_R" 
+             data-theme="dark">
+        </div>
+    </div>
+</div>
 
                 <button type="submit" class="submit-btn">
                     <span>SEND MESSAGE</span>
