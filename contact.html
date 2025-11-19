@@ -297,9 +297,55 @@
                 padding: 1.5rem;
             }
         }
+        /* Hide reCAPTCHA branding, show only checkbox */
+.g-recaptcha {
+    transform: scale(0.9);
+    transform-origin: 0 0;
+}
+
+/* Style the container to look like your old checkbox */
+.captcha-container .g-recaptcha > div {
+    display: flex;
+    align-items: center;
+}
+
+/* Attempt to hide the logo (Google makes this hard) */
+iframe[src*="recaptcha"] {
+    border-radius: 4px;
+}
+
+/* Alternative: Create a custom checkbox wrapper */
+.custom-captcha-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.custom-captcha-text {
+    flex: 1;
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
     </style>
 </head>
 <body>
+    <script>
+// Prevent form submission if reCAPTCHA not completed
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const recaptchaResponse = grecaptcha.getResponse();
+    
+    if (recaptchaResponse.length === 0) {
+        e.preventDefault();
+        alert('Please complete the reCAPTCHA verification!');
+        return false;
+    }
+});
+</script>
+
     <!-- Navigation -->
     <nav>
         <a href="index.html" class="logo">ARPITH</a>
