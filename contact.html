@@ -196,22 +196,23 @@
             font-size: 0.95rem;
         }
 
-        .verification-box .recaptcha-notice {
-            color: #888;
+        /* reCAPTCHA notice outside box */
+        .recaptcha-notice {
+            color: #666;
             font-size: 0.8rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #333;
+            margin-top: 0.5rem;
             line-height: 1.4;
         }
 
-        .verification-box .recaptcha-notice a {
+        .recaptcha-notice a {
             color: #ff3b30;
             text-decoration: none;
+            transition: color 0.3s;
         }
 
-        .verification-box .recaptcha-notice a:hover {
+        .recaptcha-notice a:hover {
             text-decoration: underline;
+            color: #ff5a4f;
         }
 
         .submit-btn {
@@ -359,11 +360,11 @@
                             <input type="checkbox" id="human-check" name="human-check" required>
                             <span>I solemnly swear I'm a human being that loves photography and not just three cats in a trench coat.</span>
                         </label>
-                        <div class="recaptcha-notice">
-                            This site is protected by reCAPTCHA and the Google 
-                            <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and 
-                            <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
-                        </div>
+                    </div>
+                    <div class="recaptcha-notice">
+                        This site is protected by reCAPTCHA and the Google 
+                        <a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a> and 
+                        <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.
                     </div>
                     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
                 </div>
