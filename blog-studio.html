@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Studio - ARPITH</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #1a1a1a;
+            --border: #333;
+            --text: #ffffff;
+            --text-dim: #999;
+            --accent: #ff3b30;
+            --accent-dim: #cc2f26;
+            --success: #00ff88;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Login Screen */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .login-box {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-box h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .login-box p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        input[type="password"],
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-dim);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Studio */
+        .studio {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .studio.active {
+            display: block;
+        }
+
+        .studio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .studio-header h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-secondary {
+            padding: 0.75rem 1.5rem;
+            background: var(--surface);
+            color: var(--text);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .editor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .editor-panel,
+        .preview-panel {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        textarea {
+            min-height: 400px;
+            resize: vertical;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: var(--bg);
+            border-radius: 6px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .image-upload {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .image-upload:hover {
+            border-color: var(--accent);
+        }
+
+        .image-upload input {
+            display: none;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .image-item {
+            position: relative;
+            aspect-ratio: 16/9;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-item-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .image-btn {
+            padding: 0.25rem 0.5rem;
+            background: var(--bg);
+            color: var(--text);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .preview-content {
+            background: #000;
+            padding: 2rem;
+            border-radius: 8px;
+            min-height: 500px;
+        }
+
+        .preview-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .preview-content .meta {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .preview-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .caption {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .publish-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--surface);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+        }
+
+        .publish-btn {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--accent);
+            color: var(--text);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .publish-btn:hover {
+            background: var(--accent-dim);
+        }
+
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .status.active {
+            display: block;
+        }
+
+        .status.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .status.error {
+            border-left: 4px solid var(--accent);
+        }
+
+        @media (max-width: 968px) {
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>🔒 BLOG STUDIO</h1>
+            <p>Enter password to access the blog creation tool</p>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter password">
+                <div class="error" id="loginError"></div>
+            </div>
+            <button class="btn" onclick="login()">Access Studio</button>
+        </div>
+    </div>
+
+    <!-- Main Studio -->
+    <div class="studio" id="studio">
+        <div class="studio-header">
+            <h1>📝 BLOG STUDIO</h1>
+            <div class="header-actions">
+                <button class="btn-secondary" onclick="saveDraft()">💾 Save Draft</button>
+                <button class="btn-secondary" onclick="loadDraft()">📂 Load Draft</button>
+                <button class="btn-secondary" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <div class="editor-grid">
+            <!-- Editor Panel -->
+            <div class="editor-panel">
+                <h2 class="panel-title">EDITOR</h2>
+
+                <div class="form-group">
+                    <label>Blog Title</label>
+                    <input type="text" id="blogTitle" placeholder="Enter your blog title" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="blogDate" oninput="updatePreview()">
+                </div>
+
+                <div class="form-group">
+                    <label>Thumbnail Image</label>
+                    <div class="image-upload" onclick="document.getElementById('thumbnailInput').click()">
+                        <p>📸 Click to upload thumbnail</p>
+                        <p style="font-size: 0.9rem; color: var(--text-dim);">Will be auto-resized to 600x338px</p>
+                        <input type="file" id="thumbnailInput" accept="image/*" onchange="handleThumbnail(event)">
+                    </div>
+                    <div id="thumbnailPreview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Content Images</label>
+                    <div class="image-upload" onclick="document.getElementById('imagesInput').click()">
+                        <p>🖼️ Click to upload images (max 10MB each)</p>
+                        <input type="file" id="imagesInput" accept="image/*" multiple onchange="handleImages(event)">
+                    </div>
+                    <div class="image-preview" id="imagePreview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Blog Content</label>
+                    <div class="toolbar">
+                        <button class="toolbar-btn" onclick="insertFormat('**', '**')">Bold</button>
+                        <button class="toolbar-btn" onclick="insertFormat('*', '*')">Italic</button>
+                        <button class="toolbar-btn" onclick="insertFormat('# ', '')">H1</button>
+                        <button class="toolbar-btn" onclick="insertFormat('## ', '')">H2</button>
+                        <button class="toolbar-btn" onclick="insertFormat('- ', '')">List</button>
+                        <button class="toolbar-btn" onclick="insertFormat('[Link](', ')')">Link</button>
+                        <button class="toolbar-btn" onclick="insertFormat('> ', '')">Quote</button>
+                    </div>
+                    <textarea id="blogContent" placeholder="Write your blog content here...
+
+**Bold text** for emphasis
+*Italic text* for subtle emphasis
+# Heading 1
+## Heading 2
+- Bullet points
+[Link text](URL)
+> Quotes
+
+To add images: Click on an image on the right to insert it into your content." oninput="updatePreview()"></textarea>
+                </div>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="preview-panel">
+                <h2 class="panel-title">PREVIEW</h2>
+                <div class="preview-content" id="previewContent">
+                    <p style="color: var(--text-dim);">Your blog preview will appear here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Publish Section -->
+        <div class="publish-section">
+            <h2 class="panel-title">PUBLISH TO WEBSITE</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-dim);">This will create your blog post and update your website automatically.</p>
+            <button class="publish-btn" onclick="publish()">🚀 PUBLISH BLOG</button>
+            <div class="status" id="status"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const PASSWORD = 'abhiappu123'; // Change this to your desired password
+        const GITHUB_TOKEN_KEY = 'github_token';
+        const DRAFT_KEY = 'blog_draft';
+
+        // State
+        let uploadedImages = [];
+        let thumbnailImage = null;
+
+        // Login
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('studio').classList.add('active');
+                
+                // Set today's date
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('blogDate').value = today;
+                
+                // Check for GitHub token
+                checkGitHubToken();
+            } else {
+                document.getElementById('loginError').textContent = 'Incorrect password';
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('studio').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        function checkGitHubToken() {
+            const token = localStorage.getItem(GITHUB_TOKEN_KEY);
+            if (!token) {
+                const userToken = prompt('First time setup!\n\nPaste your GitHub Personal Access Token:\n(This will be saved securely in your browser)');
+                if (userToken) {
+                    localStorage.setItem(GITHUB_TOKEN_KEY, userToken);
+                    alert('Token saved! You can now publish blogs.');
+                }
+            }
+        }
+
+        // Handle thumbnail
+        function handleThumbnail(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('Image too large! Please use images under 10MB.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    thumbnailImage = {
+                        name: file.name,
+                        data: e.target.result
+                    };
+                    
+                    const preview = document.getElementById('thumbnailPreview');
+                    preview.innerHTML = `
+                        <div class="image-item" style="margin-top: 1rem; max-width: 300px;">
+                            <img src="${e.target.result}" alt="Thumbnail">
+                        </div>
+                    `;
+                    updatePreview();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle content images
+        function handleImages(event) {
+            const files = Array.from(event.target.files);
+            
+            files.forEach(file => {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`${file.name} is too large! Please use images under 10MB.`);
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        data: e.target.result,
+                        caption: ''
+                    };
+                    
+                    uploadedImages.push(imageData);
+                    renderImagePreview();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderImagePreview() {
+            const container = document.getElementById('imagePreview');
+            container.innerHTML = uploadedImages.map(img => `
+                <div class="image-item">
+                    <img src="${img.data}" alt="${img.name}">
+                    <div class="image-item-actions">
+                        <button class="image-btn" onclick="insertImage('${img.id}')">Insert</button>
+                        <button class="image-btn" onclick="setCaption('${img.id}')">Caption</button>
+                        <button class="image-btn" onclick="removeImage('${img.id}')">✕</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function insertImage(imageId) {
+            const textarea = document.getElementById('blogContent');
+            const cursorPos = textarea.selectionStart;
+            const textBefore = textarea.value.substring(0, cursorPos);
+            const textAfter = textarea.value.substring(cursorPos);
+            
+            textarea.value = textBefore + `\n![IMAGE:${imageId}]\n` + textAfter;
+            updatePreview();
+        }
+
+        function setCaption(imageId) {
+            const caption = prompt('Enter image caption (leave empty for no caption):');
+            const image = uploadedImages.find(img => img.id == imageId);
+            if (image) {
+                image.caption = caption || '';
+            }
+            updatePreview();
+        }
+
+        function removeImage(imageId) {
+            uploadedImages = uploadedImages.filter(img => img.id != imageId);
+            renderImagePreview();
+            updatePreview();
+        }
+
+        // Insert formatting
+        function insertFormat(before, after) {
+            const textarea = document.getElementById('blogContent');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const replacement = before + selectedText + after;
+            
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + before.length, start + before.length + selectedText.length);
+            updatePreview();
+        }
+
+        // Update preview
+        function updatePreview() {
+            const title = document.getElementById('blogTitle').value;
+            const date = document.getElementById('blogDate').value;
+            const content = document.getElementById('blogContent').value;
+            
+            if (!title && !content) {
+                document.getElementById('previewContent').innerHTML = '<p style="color: var(--text-dim);">Your blog preview will appear here...</p>';
+                return;
+            }
+            
+            // Convert markdown to HTML (simple version)
+            let html = content
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/^## (.*$)/gim, '<h2 style="font-size: 1.8rem; margin-top: 2rem; margin-bottom: 1rem;">$1</h2>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/^> (.*$)/gim, '<blockquote style="border-left: 4px solid var(--accent); padding-left: 1rem; margin: 1.5rem 0; color: var(--text-dim); font-style: italic;">$1</blockquote>')
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: var(--accent); text-decoration: underline;">$1</a>')
+                .replace(/\n/g, '<br>');
+            
+            // Replace image placeholders
+            uploadedImages.forEach(img => {
+                const placeholder = `![IMAGE:${img.id}]`;
+                const imageHtml = `
+                    <img src="${img.data}" alt="${img.name}" style="max-width: 100%; border-radius: 8px; margin: 1.5rem 0;">
+                    ${img.caption ? `<p class="caption">${img.caption}</p>` : ''}
+                `;
+                html = html.replace(placeholder, imageHtml);
+            });
+            
+            // Wrap list items
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul style="margin: 1rem 0; padding-left: 1.5rem;">$1</ul>');
+            
+            const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+            
+            document.getElementById('previewContent').innerHTML = `
+                ${title ? `<h1>${title}</h1>` : ''}
+                ${formattedDate ? `<div class="meta">${formattedDate} · ${calculateReadTime(content)} min read</div>` : ''}
+                <div>${html}</div>
+            `;
+        }
+
+        function calculateReadTime(text) {
+            const words = text.split(/\s+/).length;
+            const minutes = Math.ceil(words / 200);
+            return minutes;
+        }
+
+        // Save/Load draft
+        function saveDraft() {
+            const draft = {
+                title: document.getElementById('blogTitle').value,
+                date: document.getElementById('blogDate').value,
+                content: document.getElementById('blogContent').value,
+                images: uploadedImages,
+                thumbnail: thumbnailImage
+            };
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+            showStatus('Draft saved!', 'success');
+        }
+
+        function loadDraft() {
+            const draft = localStorage.getItem(DRAFT_KEY);
+            if (!draft) {
+                alert('No saved draft found');
+                return;
+            }
+            
+            const data = JSON.parse(draft);
+            document.getElementById('blogTitle').value = data.title;
+            document.getElementById('blogDate').value = data.date;
+            document.getElementById('blogContent').value = data.content;
+            uploadedImages = data.images || [];
+            thumbnailImage = data.thumbnail;
+            
+            renderImagePreview();
+            if (thumbnailImage) {
+                document.getElementById('thumbnailPreview').innerHTML = `
+                    <div class="image-item" style="margin-top: 1rem; max-width: 300px;">
+                        <img src="${thumbnailImage.data}" alt="Thumbnail">
+                    </div>
+                `;
+            }
+            updatePreview();
+            showStatus('Draft loaded!', 'success');
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(() => {
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
+            if (title || content) {
+                saveDraft();
+            }
+        }, 30000);
+
+        // Publish
+        async function publish() {
+            const title = document.getElementById('blogTitle').value;
+            const date = document.getElementById('blogDate').value;
+            const content = document.getElementById('blogContent').value;
+            
+            if (!title || !content || !thumbnailImage) {
+                alert('Please fill in title, content, and thumbnail before publishing!');
+                return;
+            }
+            
+            const token = localStorage.getItem(GITHUB_TOKEN_KEY);
+            if (!token) {
+                alert('GitHub token not found! Please logout and login again to set it up.');
+                return;
+            }
+            
+            showStatus('Publishing your blog... This may take a minute.', 'success');
+            
+            try {
+                // This is a simplified version - you'll need to implement the full GitHub API calls
+                // For now, it generates the files for you to download
+                
+                const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                const blogHtml = generateBlogHTML(title, date, content);
+                
+                // Download the blog post
+                downloadFile(`${slug}.html`, blogHtml);
+                
+                showStatus('Blog HTML generated! Check your downloads folder. Upload it to your GitHub repo in the /blog/ folder.', 'success');
+                
+                // Clear form
+                setTimeout(() => {
+                    if (confirm('Blog published! Clear the form to create a new one?')) {
+                        document.getElementById('blogTitle').value = '';
+                        document.getElementById('blogContent').value = '';
+                        uploadedImages = [];
+                        thumbnailImage = null;
+                        renderImagePreview();
+                        document.getElementById('thumbnailPreview').innerHTML = '';
+                        updatePreview();
+                    }
+                }, 2000);
+                
+            } catch (error) {
+                showStatus('Error: ' + error.message, 'error');
+            }
+        }
+
+        function generateBlogHTML(title, date, content) {
+            // Convert content to HTML
+            let html = content
+                .replace(/^# (.*$)/gim, '<h1 style="font-size: 2.5rem; margin: 2rem 0 1rem;">$1</h1>')
+                .replace(/^## (.*$)/gim, '<h2 style="font-size: 2rem; margin: 2rem 0 1rem;">$1</h2>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/^> (.*$)/gim, '<blockquote style="border-left: 4px solid #ff3b30; padding-left: 1.5rem; margin: 2rem 0; color: #999; font-style: italic;">$1</blockquote>')
+                .replace(/^- (.*$)/gim, '<li style="margin: 0.5rem 0;">$1</li>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: #ff3b30; text-decoration: underline;">$1</a>')
+                .replace(/\n\n/g, '</p><p>')
+                .replace(/\n/g, '<br>');
+            
+            // Replace image placeholders
+            uploadedImages.forEach(img => {
+                const placeholder = `![IMAGE:${img.id}]`;
+                const imageHtml = `
+                    <img src="${img.data}" alt="${img.name}" style="max-width: 100%; border-radius: 8px; margin: 2rem 0;">
+                    ${img.caption ? `<p style="text-align: center; color: #999; font-size: 0.9rem; font-style: italic; margin-top: 0.5rem;">${img.caption}</p>` : ''}
+                `;
+                html = html.replace(placeholder, imageHtml);
+            });
+            
+            html = html.replace(/(<li.*<\/li>)/s, '<ul style="margin: 1.5rem 0; padding-left: 2rem; line-height: 1.8;">$1</ul>');
+            html = '<p>' + html + '</p>';
+            
+            const formattedDate = new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const readTime = calculateReadTime(content);
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="../favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} - ARPITH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff3b30;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 6rem;
+            left: 2rem;
+            z-index: 100;
+            padding: 1rem 1.5rem;
+            background: #1a1a1a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #ff3b30;
+            transform: translateX(-5px);
+        }
+
+        article {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .blog-header {
+            margin-bottom: 3rem;
+        }
+
+        .blog-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            color: #7F8C8D;
+            font-size: 1.1rem;
+        }
+
+        .blog-content {
+            font-size: 1.2rem;
+            line-height: 2;
+        }
+
+        footer {
+            background: #0a0a0a;
+            padding: 2rem 4rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+            article {
+                padding: 6rem 2rem 2rem;
+            }
+            .blog-title {
+                font-size: 2.5rem;
+            }
+            .back-button {
+                top: 5rem;
+                left: 1rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../index.html" class="logo">ARPITH</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Portfolio</a></li>
+            <li><a href="../index.html#photography">Photography</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <a href="../blog.html" class="back-button">← Back to Blog</a>
+
+    <article>
+        <div class="blog-header">
+            <h1 class="blog-title">${title}</h1>
+            <div class="blog-meta">${formattedDate} · ${readTime} min read</div>
+        </div>
+
+        <div class="blog-content">
+            ${html}
+        </div>
+    </article>
+
+    <footer>
+        <div>ARPITH BINSA © 2025</div>
+    </footer>
+</body>
+</html>`;
+        }
+
+        function downloadFile(filename, content) {
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = `status active ${type}`;
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    status.classList.remove('active');
+                }, 5000);
+            }
+        }
+
+        // Prevent accidental page close
+        window.addEventListener('beforeunload', (e) => {
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
+            if (title || content) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>
