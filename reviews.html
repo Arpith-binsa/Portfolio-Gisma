@@ -627,7 +627,7 @@
         const GITHUB_TOKEN_KEY = 'github_token';
         const GITHUB_REPO = 'Arpith-binsa/Portfolio-Gisma';
         const REVIEWS_FILE = 'reviews-data.json';
-        const EMAIL_ENDPOINT = 'https://formspree.io/f/myzlrkzp'; // Use your Formspree endpoint for notifications
+        const NOTIFICATION_EMAIL = 'arpithbinsa.photography@gmail.com';
 
         // State
         let reviewsData = { reviews: [] };
@@ -701,10 +701,15 @@
         // Load reviews from GitHub
         async function loadReviews() {
             try {
-                const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/main/${REVIEWS_FILE}?t=${Date.now()}`);
+                // Add timestamp to prevent caching
+                const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/main/${REVIEWS_FILE}?nocache=${Date.now()}`);
                 if (response.ok) {
-                    reviewsData = await response.json();
+                    const data = await response.json();
+                    reviewsData = data;
+                    console.log('Loaded reviews:', reviewsData);
                     renderReviews();
+                } else {
+                    console.error('Failed to load reviews:', response.status);
                 }
             } catch (error) {
                 console.error('Error loading reviews:', error);
@@ -923,24 +928,30 @@
                 if (!updateResponse.ok) throw new Error('Failed to save review');
 
                 // Send email notification
-                await fetch(EMAIL_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        subject: `⭐ New Review Submitted!`,
-                        message: `
-Name: ${name}
-Rating: ${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}
-Review: "${text}"
-Date: ${new Date().toLocaleDateString()}
-
-View on GitHub: https://github.com/${GITHUB_REPO}/blob/main/${REVIEWS_FILE}
-                        `
-                    })
-                });
+                try {
+                    await fetch('https://formspree.io/f/myzlrkzp', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            _subject: '⭐ New Review Submitted - arpithbinsa.com',
+                            _replyto: NOTIFICATION_EMAIL,
+                            name: name,
+                            rating: '★'.repeat(selectedRating) + '☆'.repeat(5 - selectedRating),
+                            review: text,
+                            date: new Date().toLocaleDateString(),
+                            github_link: `https://github.com/${GITHUB_REPO}/blob/main/${REVIEWS_FILE}`
+                        })
+                    });
+                } catch (emailError) {
+                    // Non-critical - review is still saved even if email fails
+                    console.log('Email notification skipped:', emailError);
+                }
 
                 statusMessage.className = 'status-message success';
-                statusMessage.textContent = '✅ Thank you! Your review has been submitted and will appear on the site shortly.';
+                statusMessage.textContent = '✅ Thank you! Your review has been submitted and will appear on the site in 2-3 minutes.';
 
                 setTimeout(() => {
                     closeModal();
