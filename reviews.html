@@ -546,7 +546,7 @@
         <a href="index.html" class="logo">ARPITH</a>
         <ul class="nav-links">
             <li><a href="index.html">Portfolio</a></li>
-            <li><a href="index.html">Photography</a></li>
+            <li><a href="index.html#photography">Photography</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -555,7 +555,7 @@
     <!-- Header -->
     <section class="reviews-header">
         <h1>SEE WHAT MY CLIENTS SAY</h1>
-        <p>Real feedback from photographers, coaches, and talents I've worked with</p>
+        <p>Real feedback from photographers, coaches, and creatives I've worked with</p>
         <button class="leave-review-btn" onclick="openModal()">✍️ LEAVE A REVIEW</button>
     </section>
 
@@ -590,7 +590,7 @@
                     <input type="text" id="reviewerName" required>
                     <div class="checkbox-group">
                         <input type="checkbox" id="anonymousCheck">
-                        <label for="anonymousCheck">Prefer not to say? Alright, keep your secrets</label>
+                        <label for="anonymousCheck">Prefer not to say, alright keep your secrets</label>
                     </div>
                 </div>
 
@@ -636,7 +636,22 @@
         let selectedRating = 0;
 
         // Load reviews on page load
-        window.addEventListener('DOMContentLoaded', loadReviews);
+        window.addEventListener('DOMContentLoaded', () => {
+            checkGitHubToken();
+            loadReviews();
+        });
+
+        // Check for GitHub token
+        function checkGitHubToken() {
+            const token = localStorage.getItem(GITHUB_TOKEN_KEY);
+            if (!token) {
+                const userToken = prompt('First time setup!\n\nPaste your GitHub Personal Access Token:\n(This will be saved securely in your browser)');
+                if (userToken) {
+                    localStorage.setItem(GITHUB_TOKEN_KEY, userToken.trim());
+                    alert('Token saved! You can now submit reviews.');
+                }
+            }
+        }
 
         // Star rating functionality
         document.querySelectorAll('#starRating span').forEach(star => {
