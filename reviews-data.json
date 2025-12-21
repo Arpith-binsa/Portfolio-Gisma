@@ -1,0 +1,12 @@
+{
+  "_comment": "REVIEWS DATABASE - Edit this file to manage reviews",
+  "_instructions": {
+    "how_to_add_position": "Change 'position': null to 'position': 'Coach at Blau Weiss Berlin'",
+    "how_to_add_photo": "Change 'photo': null to 'photo': 'https://your-cloudinary-url.jpg'",
+    "how_to_feature": "Change 'featured': false to 'featured': true (review will appear in carousel)",
+    "how_to_delete": "Delete the entire review object from the array",
+    "featured_reviews": "Only reviews with 'featured': true appear in the carousel at top of page",
+    "all_reviews": "All reviews appear in the grid below carousel, newest first"
+  },
+  "reviews": []
+}
