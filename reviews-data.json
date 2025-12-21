@@ -28,6 +28,16 @@
       "text": "testing testing",
       "date": "2025-12-21",
       "featured": false
+    },
+    {
+      "id": "1766347798515",
+      "name": "Anonymous",
+      "position": null,
+      "photo": null,
+      "rating": 5,
+      "text": "test",
+      "date": "2025-12-21",
+      "featured": false
     }
   ]
 }
