@@ -8,5 +8,16 @@
     "featured_reviews": "Only reviews with 'featured': true appear in the carousel at top of page",
     "all_reviews": "All reviews appear in the grid below carousel, newest first"
   },
-  "reviews": []
+  "reviews": [
+    {
+      "id": "1766346158905",
+      "name": "Anonymous",
+      "position": null,
+      "photo": null,
+      "rating": 5,
+      "text": "stole my wallet, great photographer tho ngl",
+      "date": "2025-12-21",
+      "featured": false
+    }
+  ]
 }
