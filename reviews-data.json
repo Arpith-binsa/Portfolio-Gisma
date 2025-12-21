@@ -9,35 +9,7 @@
     "all_reviews": "All reviews appear in the grid below carousel, newest first"
   },
   "reviews": [
-    {
-      "id": "1766346158905",
-      "name": "Anonymous",
-      "position": null,
-      "photo": null,
-      "rating": 5,
-      "text": "stole my wallet, great photographer tho ngl",
-      "date": "2025-12-21",
-      "featured": false
-    },
-    {
-      "id": "1766347099229",
-      "name": "Anonymous",
-      "position": null,
-      "photo": null,
-      "rating": 5,
-      "text": "testing testing",
-      "date": "2025-12-21",
-      "featured": false
-    },
-    {
-      "id": "1766347798515",
-      "name": "Anonymous",
-      "position": null,
-      "photo": null,
-      "rating": 5,
-      "text": "test",
-      "date": "2025-12-21",
-      "featured": false
-    }
+
+
   ]
 }
