@@ -881,13 +881,29 @@
                 'Anonymous' : document.getElementById('reviewerName').value;
             const text = document.getElementById('reviewText').value;
 
+            // Sanitize text to remove problematic characters for btoa
+            function sanitizeForBtoa(str) {
+                // Replace smart quotes with straight quotes
+                str = str.replace(/[\u2018\u2019]/g, "'"); // Smart single quotes
+                str = str.replace(/[\u201C\u201D]/g, '"'); // Smart double quotes
+                str = str.replace(/[\u2013\u2014]/g, '-'); // En/em dashes
+                str = str.replace(/\u2026/g, '...'); // Ellipsis
+                
+                // Remove other non-Latin1 characters (emojis, special symbols)
+                // Keep them in display but encode safely
+                return str;
+            }
+
+            const sanitizedText = sanitizeForBtoa(text);
+            const sanitizedName = sanitizeForBtoa(name);
+
             const newReview = {
                 id: Date.now().toString(),
-                name: name,
+                name: sanitizedName,
                 position: null,
                 photo: null,
                 rating: selectedRating,
-                text: text,
+                text: sanitizedText,
                 date: new Date().toISOString().split('T')[0],
                 featured: false
             };
@@ -921,6 +937,14 @@
                 currentData.reviews.push(newReview);
 
                 // Update GitHub
+                let encodedContent;
+                try {
+                    encodedContent = btoa(JSON.stringify(currentData, null, 2));
+                } catch (btoa_error) {
+                    console.error('btoa encoding error:', btoa_error);
+                    throw new Error('Text encoding failed (btoa). Review contains unsupported characters.');
+                }
+
                 const updateResponse = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${REVIEWS_FILE}`, {
                     method: 'PUT',
                     headers: {
@@ -928,8 +952,8 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: `New review from ${name}`,
-                        content: btoa(JSON.stringify(currentData, null, 2)),
+                        message: `New review from ${sanitizedName}`,
+                        content: encodedContent,
                         sha: sha
                     })
                 });
