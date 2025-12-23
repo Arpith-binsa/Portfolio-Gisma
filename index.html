@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/x-icon" href="./favicon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARPITH - Photography Portfolio</title>
@@ -27,8 +28,9 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 1.5rem 4rem;
             display: flex;
             justify-content: space-between;
@@ -302,7 +304,9 @@
             gap: 1.5rem;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
-            animation-play-state: running;
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .carousel-track-1 {
@@ -324,30 +328,189 @@
             object-fit: cover;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             flex-shrink: 0;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         .carousel-track img:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
             box-shadow: 0 10px 30px rgba(255, 59, 48, 0.4);
             cursor: pointer;
         }
 
         @keyframes scrollRight {
             0% {
-                transform: translateX(0);
+                transform: translate3d(0, 0, 0);
             }
             100% {
-                transform: translateX(-50%);
+                transform: translate3d(-50%, 0, 0);
             }
         }
 
         @keyframes scrollLeft {
             0% {
-                transform: translateX(-50%);
+                transform: translate3d(-50%, 0, 0);
             }
             100% {
-                transform: translateX(0);
+                transform: translate3d(0, 0, 0);
             }
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #000000;
+        }
+
+        .reviews-section .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .reviews-carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .reviews-carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .reviews-carousel-card {
+            min-width: 100%;
+            padding: 0 2rem;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        .reviews-review-card {
+            background: #f5f5f5;
+            color: #000;
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .reviews-stars {
+            font-size: 1.5rem;
+            color: #ffa500;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .reviews-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+            font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .reviews-author {
+            text-align: center;
+        }
+
+        .reviews-author-photo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+        }
+
+        .reviews-author-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 0.3rem;
+        }
+
+        .reviews-author-position {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .reviews-carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .reviews-carousel-btn {
+            background: #ff3b30;
+            color: #fff;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reviews-carousel-btn:hover {
+            background: #cc2f26;
+            transform: scale(1.1);
+        }
+
+        .reviews-carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .reviews-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reviews-dot.active {
+            background: #ff3b30;
+            transform: scale(1.3);
+        }
+
+        .see-all-reviews-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #ff3b30;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .see-all-reviews-btn:hover {
+            background: #cc2f26;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
         }
 
         /* Contact Section */
@@ -502,6 +665,14 @@
 
             .album-title {
                 font-size: 1.5rem;
+            }
+
+            .reviews-carousel-card {
+                padding: 0 1rem;
+            }
+
+            .reviews-review-card {
+                padding: 1.5rem;
             }
 
             .contact-section {
@@ -668,6 +839,20 @@
             <div class="carousel-track carousel-track-3"></div>
         </div>
     </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section" id="reviews">
+        <div class="section-header">
+            <h2>REVIEWS</h2>
+        </div>
+
+        <div class="reviews-carousel-container" id="reviewsCarouselContainer">
+            <div class="reviews-carousel-wrapper" id="reviewsCarouselWrapper"></div>
+        </div>
+        <div class="reviews-carousel-controls" id="reviewsCarouselControls"></div>
+
+        <a href="reviews.html" class="see-all-reviews-btn">See All Reviews →</a>
+    </section>
     
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
@@ -696,6 +881,7 @@
         <div>ARPITH BINSA © 2025</div>
         <ul class="footer-links">
             <li><a href="blog.html">Blog</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
             <li><a href="#photography">Photography</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -857,6 +1043,110 @@
         }
 
         loadCarouselImages();
+
+        // LOAD REVIEWS
+        let reviewsCurrentSlide = 0;
+        let reviewsCarouselInterval;
+
+        async function loadReviewsCarousel() {
+            try {
+                const response = await fetch(`https://raw.githubusercontent.com/Arpith-binsa/Portfolio-Gisma/main/reviews-data.json?nocache=${Date.now()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const featuredReviews = data.reviews.filter(r => r.featured).slice(0, 3);
+                    
+                    if (featuredReviews.length > 0) {
+                        renderReviewsCarousel(featuredReviews);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+            }
+        }
+
+        function renderReviewsCarousel(reviews) {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            wrapper.innerHTML = reviews.map(review => `
+                <div class="reviews-carousel-card">
+                    <div class="reviews-review-card">
+                        <div>
+                            <div class="reviews-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                            <div class="reviews-text">"${review.text}"</div>
+                        </div>
+                        <div class="reviews-author">
+                            ${review.photo ? `<img src="${review.photo}" class="reviews-author-photo" alt="${review.name}">` : ''}
+                            <div class="reviews-author-name">${review.name}</div>
+                            ${review.position ? `<div class="reviews-author-position">${review.position}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (reviews.length > 1) {
+                renderReviewsCarouselControls(reviews.length);
+                startReviewsCarousel();
+            }
+        }
+
+        function renderReviewsCarouselControls(count) {
+            const controls = document.getElementById('reviewsCarouselControls');
+            controls.innerHTML = `
+                <button class="reviews-carousel-btn" onclick="previousReviewsSlide()">←</button>
+                <div class="reviews-carousel-dots">
+                    ${Array(count).fill(0).map((_, i) => `<div class="reviews-dot ${i === 0 ? 'active' : ''}" onclick="goToReviewsSlide(${i})"></div>`).join('')}
+                </div>
+                <button class="reviews-carousel-btn" onclick="nextReviewsSlide()">→</button>
+            `;
+        }
+
+        function startReviewsCarousel() {
+            stopReviewsCarousel();
+            reviewsCarouselInterval = setInterval(nextReviewsSlide, 6000);
+        }
+
+        function stopReviewsCarousel() {
+            clearInterval(reviewsCarouselInterval);
+        }
+
+        function nextReviewsSlide() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            const totalSlides = wrapper.children.length;
+            if (totalSlides === 0) return;
+
+            reviewsCurrentSlide = (reviewsCurrentSlide + 1) % totalSlides;
+            updateReviewsCarousel();
+        }
+
+        function previousReviewsSlide() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            const totalSlides = wrapper.children.length;
+            if (totalSlides === 0) return;
+
+            reviewsCurrentSlide = (reviewsCurrentSlide - 1 + totalSlides) % totalSlides;
+            updateReviewsCarousel();
+        }
+
+        function goToReviewsSlide(index) {
+            reviewsCurrentSlide = index;
+            updateReviewsCarousel();
+            startReviewsCarousel();
+        }
+
+        function updateReviewsCarousel() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            wrapper.style.transform = `translate3d(-${reviewsCurrentSlide * 100}%, 0, 0)`;
+
+            document.querySelectorAll('.reviews-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === reviewsCurrentSlide);
+            });
+        }
+
+        // Load reviews on page load
+        loadReviewsCarousel();
+
+        // Pause reviews carousel on hover
+        document.querySelector('.reviews-carousel-container')?.addEventListener('mouseenter', stopReviewsCarousel);
+        document.querySelector('.reviews-carousel-container')?.addEventListener('mouseleave', startReviewsCarousel);
 
         // Email copy
         document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
