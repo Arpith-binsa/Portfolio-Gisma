@@ -97,8 +97,10 @@
             margin-bottom: 2rem;
         }
 
-        .leave-review-btn {
-            display: inline-block;
+       .leave-review-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
             padding: 1rem 2rem;
             background: #ff3b30;
             color: #ffffff;
@@ -109,6 +111,13 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
+        }
+
+       .leave-review-btn img {
+           width: 20px;
+           height: 20px;
+           object-fit: contain;
+           filter: brightness(0) invert(1);
         }
 
         .leave-review-btn:hover {
@@ -553,8 +562,11 @@
     <!-- Header -->
     <section class="reviews-header">
         <h1>SEE WHAT MY CLIENTS SAY</h1>
-        <p>Real feedback from photographers, coaches, and talents I've worked with</p>
-        <button class="leave-review-btn" onclick="openModal()">✏️ LEAVE A REVIEW</button>
+        <p>Real feedback from photographers, coaches, and creatives I've worked with</p>
+        <button class="leave-review-btn" onclick="openModal()">
+            <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1766492152/1000080721-removebg-preview_bthktj.png" alt="Write Review">
+            LEAVE A REVIEW
+        </button>
     </section>
 
     <!-- Featured Reviews Carousel -->
