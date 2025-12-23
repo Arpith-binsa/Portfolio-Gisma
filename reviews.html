@@ -175,6 +175,7 @@
             padding: 0 2rem;
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
+            cursor: pointer;
         }
 
         .review-card {
@@ -186,6 +187,11 @@
             min-width: 280px;
             margin: 0 auto;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .carousel-card:hover .review-card {
+            transform: scale(1.02);
         }
 
         .stars {
@@ -784,10 +790,10 @@
         function renderCarousel(reviews) {
             const wrapper = document.getElementById('carouselWrapper');
             wrapper.innerHTML = reviews.map(review => `
-                <div class="carousel-card">
+                <div class="carousel-card" onclick="expandCarouselReview(this, event)">
                     <div class="review-card">
                         <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
-                        <div class="review-text ${review.text.length > 200 ? 'truncated' : ''}" onclick="expandReview(this)">
+                        <div class="review-text ${review.text.length > 200 ? 'truncated' : ''}" data-full-text="${review.text.replace(/"/g, '&quot;')}">
                             "${review.text}"
                         </div>
                         <div class="review-author">
@@ -900,6 +906,21 @@
                 textElement.classList.remove('truncated');
                 const readMore = textElement.querySelector('.read-more');
                 if (readMore) readMore.remove();
+            }
+        }
+
+        // Expand carousel review (click anywhere on card)
+        function expandCarouselReview(cardElement, event) {
+            // Don't expand if clicking on carousel controls
+            if (event.target.closest('.carousel-btn') || event.target.closest('.dot')) {
+                return;
+            }
+
+            const textElement = cardElement.querySelector('.review-text');
+            if (textElement && textElement.classList.contains('truncated')) {
+                stopCarousel(); // Stop auto-scroll when user clicks
+                textElement.classList.remove('truncated');
+                textElement.style.cursor = 'default';
             }
         }
 

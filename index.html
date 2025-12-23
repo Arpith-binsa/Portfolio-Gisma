@@ -502,7 +502,7 @@
             font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s;
-            margin: 0 auto;
+            margin: 3rem auto 0;
             display: block;
             width: fit-content;
         }
@@ -861,7 +861,7 @@
             <p>Available for freelance photography projects, collaborations, and commissions. Get in touch to discuss your next project.</p>
         </div>
         <div class="contact-buttons">
-            <a href="mailto:admin@arpithbinsa.com" class="contact-btn">
+            <a href="/cdn-cgi/l/email-protection#2243464f4b4c624350524b564a404b4c51430c414d4f" class="contact-btn">
                 <span>📧 Email Me</span>
                 <span>→</span>
             </a>
@@ -887,7 +887,7 @@
         </ul>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1190,8 +1190,9 @@
                     }, 3000);
                 }, 1000);
             }).catch(err => {
-                console.error('Failed to copy email:', err);
+                console.error('Could not copy email: ', err);
             });
+            e.preventDefault();
         });
     </script>
 </body>
