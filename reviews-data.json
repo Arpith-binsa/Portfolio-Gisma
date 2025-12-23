@@ -51,13 +51,13 @@
     },
     {
       "id": "1766491299736",
-      "name": "Farooque",
-      "position": null,
-      "photo": null,
+      "name": "Farooque Ahmed",
+      "position": "Manager - Churuli FC",
+      "photo": "https://res.cloudinary.com/du0tvwlwp/image/upload/v1766492408/Screenshot_20251223-130649_2_cswuqt.jpg",
       "rating": 5,
       "text": "An incredibly talented photographer with a great eye for detail. The entire process was smooth and professional, the final images exceeded expectations and was delivered quickly. highly recommend.",
-      "date": "2025-12-23",
-      "featured": false
+      "date": "2025-11-14",
+      "featured": true
     }
   ]
 }
