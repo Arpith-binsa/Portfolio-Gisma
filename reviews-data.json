@@ -59,15 +59,5 @@
       "date": "2025-11-14",
       "featured": true
     },
-    {
-      "id": "1766505787366",
-      "name": "Anonymous",
-      "position": null,
-      "photo": null,
-      "rating": 5,
-      "text": "testing",
-      "date": "2025-12-23",
-      "featured": false
-    }
   ]
 }
