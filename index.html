@@ -493,7 +493,6 @@
         }
 
         .see-all-reviews-btn {
-            display: inline-block;
             padding: 1.2rem 3rem;
             background: #ff3b30;
             color: #ffffff;
@@ -700,11 +699,11 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">ARPITH</div>
+        <a href="/" class="logo">ARPITH</a>
         <ul class="nav-links">
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -747,7 +746,7 @@
                             <span>Sports</span>
                         </div>
                     </div>
-                    <a href="photography/album-1.html" class="view-collection">VIEW COLLECTION →</a>
+                    <a href="/photography/album-1" class="view-collection">VIEW COLLECTION →</a>
                 </div>
             </div>
 
@@ -771,7 +770,7 @@
                             <span>Sports</span>
                         </div>
                     </div>
-                    <a href="photography/album-2.html" class="view-collection">VIEW COLLECTION →</a>
+                    <a href="/photography/album-2" class="view-collection">VIEW COLLECTION →</a>
                 </div>
             </div>
 
@@ -795,7 +794,7 @@
                             <span>Fashion</span>
                         </div>
                     </div>
-                    <a href="photography/album-3.html" class="view-collection">VIEW COLLECTION →</a>
+                    <a href="/photography/album-3" class="view-collection">VIEW COLLECTION →</a>
                 </div>
             </div>
 
@@ -819,7 +818,7 @@
                             <span>Editorial</span>
                         </div>
                     </div>
-                    <a href="photography/album-4.html" class="view-collection">VIEW COLLECTION →</a>
+                    <a href="/photography/album-4" class="view-collection">VIEW COLLECTION →</a>
                 </div>
             </div>
         </div>
@@ -851,7 +850,7 @@
         </div>
         <div class="reviews-carousel-controls" id="reviewsCarouselControls"></div>
 
-        <a href="reviews.html" class="see-all-reviews-btn">See All Reviews →</a>
+        <a href="/reviews" class="see-all-reviews-btn">See All Reviews →</a>
     </section>
     
     <!-- Contact Section -->
@@ -869,7 +868,7 @@
                 <span>📷 Instagram</span>
                 <span>→</span>
             </a>
-            <a href="contact.html" class="contact-btn">
+            <a href="/contact" class="contact-btn">
                 <span>💬 Contact Form</span>
                 <span>→</span>
             </a>
@@ -880,10 +879,11 @@
     <footer>
         <div>ARPITH BINSA © 2025</div>
         <ul class="footer-links">
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/reviews">Reviews</a></li>
             <li><a href="#photography">Photography</a></li>
-            <li><a href="contact.html">Contact</a></li>
+
+            <li><a href="/contact">Contact</a></li>
         </ul>
     </footer>
 
@@ -1026,23 +1026,24 @@
             setTimeout(() => {
                 document.querySelectorAll('.carousel-track-1 img').forEach(img => {
                     img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-1.html';
+                        window.location.href = '/photography/album-1';
                     });
                 });
                 document.querySelectorAll('.carousel-track-2 img').forEach(img => {
                     img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-4.html';
+                        window.location.href = '/photography/album-4';
                     });
                 });
                 document.querySelectorAll('.carousel-track-3 img').forEach(img => {
                     img.addEventListener('click', () => {
-                        window.location.href = 'photography/album-3.html';
+                        window.location.href = '/photography/album-3';
                     });
                 });
             }, 100);
         }
 
         loadCarouselImages();
+
 
         // LOAD REVIEWS
         let reviewsCurrentSlide = 0;
