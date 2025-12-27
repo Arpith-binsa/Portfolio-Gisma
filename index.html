@@ -1198,5 +1198,164 @@
             e.preventDefault();
         });
     </script>
+
+    <!-- Ko-fi Widget with Enhanced Animations -->
+<!-- Add RIGHT BEFORE </body> tag -->
+
+<!-- Ko-fi Trigger Button -->
+<div id="kofi-trigger" style="position: fixed; bottom: -200px; right: 20px; z-index: 9999; transition: bottom 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+    <button id="kofi-btn" style="background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%); border: 2px solid #ff3b30; border-radius: 50px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; box-shadow: 0 10px 40px rgba(255, 59, 48, 0.4), 0 0 30px rgba(255, 59, 48, 0.3); font-family: Inter, sans-serif; position: relative; overflow: hidden;">
+        <span id="kofi-icon" style="font-size: 2rem;">☕</span>
+        <span style="color: #ffffff; font-size: 1rem; font-weight: 700;">Like my work? Buy me a coffee!</span>
+        <span id="kofi-pulse" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: rgba(255, 59, 48, 0.4); animation: pulse 2s infinite;"></span>
+    </button>
+</div>
+
+<!-- Ko-fi Overlay Widget -->
+<div id="kofi-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; align-items: center; justify-content: center;">
+    <div id="kofi-backdrop" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);"></div>
+    <div style="position: relative; z-index: 10001; max-width: 500px; width: 90%; background: #f9f9f9; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(255, 59, 48, 0.5);">
+        <button id="kofi-close" style="position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.6); border: none; color: #fff; font-size: 1.8rem; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; z-index: 10002; display: flex; align-items: center; justify-content: center;">×</button>
+        <iframe src="https://ko-fi.com/arpithbinsa/?hidefeed=true&widget=true&embed=true" style="border:none; width:100%; background:#f9f9f9;" height="712" title="Support Arpith"></iframe>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    10% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+    30% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+    40% {
+        transform: translateY(-10px) rotate(-3deg);
+    }
+    60% {
+        transform: translateY(-5px) rotate(3deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) rotate(-2deg); }
+    20%, 40%, 60%, 80% { transform: translateX(5px) rotate(2deg); }
+}
+
+@keyframes steam {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-8px) scale(1.1); }
+}
+
+@keyframes glow {
+    0%, 100% { 
+        box-shadow: 0 10px 40px rgba(255, 59, 48, 0.4), 0 0 30px rgba(255, 59, 48, 0.3);
+    }
+    50% { 
+        box-shadow: 0 10px 60px rgba(255, 59, 48, 0.8), 0 0 50px rgba(255, 59, 48, 0.6), 0 0 80px rgba(255, 59, 48, 0.4);
+    }
+}
+
+#kofi-btn.first-appear {
+    animation: bounce 1.5s ease-out, glow 2s infinite;
+}
+
+#kofi-btn.first-appear #kofi-icon {
+    animation: steam 1s infinite;
+}
+
+#kofi-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 50px rgba(255, 59, 48, 0.6), 0 0 40px rgba(255, 59, 48, 0.5);
+}
+</style>
+
+<script>
+(function() {
+    var trigger = document.getElementById('kofi-trigger');
+    var btn = document.getElementById('kofi-btn');
+    var overlay = document.getElementById('kofi-overlay');
+    var backdrop = document.getElementById('kofi-backdrop');
+    var closeBtn = document.getElementById('kofi-close');
+    var shown = false;
+    var firstAppear = true;
+    
+    // Show/hide trigger based on scroll position
+    window.addEventListener('scroll', function() {
+        var scrollHeight = document.documentElement.scrollHeight;
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        var clientHeight = document.documentElement.clientHeight;
+        var scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+        
+        // Show at 50% scroll
+        if (scrollPercent >= 50 && !shown) {
+            trigger.style.bottom = '20px';
+            shown = true;
+            
+            // Add attention-grabbing animation on first appear
+            if (firstAppear) {
+                btn.classList.add('first-appear');
+                firstAppear = false;
+                
+                // Add shake after bounce
+                setTimeout(function() {
+                    btn.style.animation = 'shake 0.5s ease-in-out';
+                }, 1500);
+                
+                // Remove animation classes after they finish
+                setTimeout(function() {
+                    btn.classList.remove('first-appear');
+                    btn.style.animation = '';
+                }, 3000);
+            }
+        }
+        
+        // Hide when scrolled back to top (less than 40%)
+        if (scrollPercent < 40 && shown) {
+            trigger.style.bottom = '-200px';
+            shown = false;
+        }
+    });
+    
+    // Open widget
+    btn.addEventListener('click', function() {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close widget
+    function closeWidget() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    closeBtn.addEventListener('click', closeWidget);
+    backdrop.addEventListener('click', closeWidget);
+    
+    // ESC key close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeWidget();
+    });
+})();
+</script>
+  
 </body>
 </html>
