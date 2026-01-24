@@ -579,8 +579,25 @@
         footer {
             background: #0a0a0a;
             padding: 2rem 4rem;
-            text-align: center;
-            margin-top: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff3b30;
         }
 
         /* Responsive */
@@ -737,6 +754,11 @@
     <!-- Footer -->
    <footer>
         <div><strong>Arpith Binsa</strong> | Sports Photographer Berlin © 2025</div>
+        <ul class="footer-links">
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
     </footer>
 
     <script>
