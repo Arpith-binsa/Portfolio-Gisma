@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reviews - ARPITH</title>
+
+    <meta name="description" content="Read testimonials for Arpith Binsa, the leading sports and fashion photographer in Berlin. 5-star rated action photography and editorial work.">
+    <meta name="keywords" content="Sports Photographer Berlin, Football Photography Berlin, Arpith Binsa Reviews, Fashion Photographer Berlin">
+    <link rel="canonical" href="https://www.arpithbinsa.com/reviews" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Arpith Binsa Photography",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "ratingCount": "15"
+      }
+    }
+    </script>
 
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/favicon.png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reviews - ARPITH</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    
+
+    <script>
+        if (!window.fetch) {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.js"><\/script>');
+        }
+        if (!window.Promise) {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8.3.0/dist/polyfill.min.js"><\/script>');
+        }
+    </script>
+</head>
+<body>
+   
     <!-- Polyfills for old browsers -->
     <script>
         // Fetch polyfill for old Safari/Chrome
@@ -603,6 +633,17 @@
                 height: 60px;
             }
         }
+        .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
     </style>
 </head>
 <body>
@@ -619,13 +660,21 @@
 
     <!-- Header -->
     <section class="reviews-header">
-        <h1>SEE WHAT MY CLIENTS SAY</h1>
-        <p>Real feedback from photographers, coaches, and talents I've worked with</p>
-        <button class="leave-review-btn" onclick="openModal()">
-            <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1766492152/1000080721-removebg-preview_bthktj.png" alt="Write Review">
-            LEAVE A REVIEW
-        </button>
-    </section>
+    <h1>
+        <span class="sr-only">Client Reviews for Arpith Binsa: Professional Sports and Action Photographer in Berlin</span>
+        
+        <span class="word">THE</span>
+        <span class="word">WORD</span>
+        <span class="word">ON</span>
+        <span class="word">THE</span>
+        <span class="word">STREET</span>
+    </h1>
+    <p>Real feedback from photographers, coaches, and talents I've worked with</p>
+    <button class="leave-review-btn" onclick="openModal()">
+        <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1766492152/1000080721-removebg-preview_bthktj.png" alt="Write Review">
+        LEAVE A REVIEW
+    </button>
+</section>
 
     <!-- Featured Reviews Carousel -->
     <section class="featured-section" id="featuredSection" style="display: none;">
@@ -1124,6 +1173,7 @@
                 }
             }
         });
+        
 
         // Pause carousel on hover
         document.querySelector('.carousel-container')?.addEventListener('mouseenter', stopCarousel);

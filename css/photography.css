@@ -366,6 +366,7 @@ footer {
     }
 }
 
+
 @media (max-width: 768px) {
     nav {
         padding: 1rem 2rem;
@@ -468,6 +469,7 @@ body.carousel-ready .carousel-track {
         transform: translateX(0);
     }
 }
+
 
 .carousel-track img {
     width: 400px;
