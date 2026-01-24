@@ -5,7 +5,9 @@
     <link rel="apple-touch-icon" href="/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLAU-WEISS FRIEDRICHSHAIN - ARPITH</title>
+    <title>Blau-Weiss Friedrichshain | Sports Photographer Berlin | ARPITH</title>
+    <meta name="description" content="Action-packed sports photography of Blau-Weiss Friedrichshain in Berlin. Captured by freelance photographer Arpith Binsa. High-intensity football moments and match coverage.">
+    <link rel="canonical" href="https://www.arpithbinsa.com/photography/album-1/">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -204,6 +206,18 @@
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
 
+        .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
         /* Mobile Responsive - Compact Grid Like Photos App */
 @media (max-width: 768px) {
     .photo-grid {
@@ -270,10 +284,13 @@
     </a>
 
     <div class="hero-image">
-        <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/1069.jpg" alt="Blau-Weiss Friedrichshain">
-        <div class="hero-overlay">
-            <h1 class="album-title">BLAU-WEISS FRIEDRICHSHAIN</h1>
-            <p class="album-date">2025/08 - 2025/11</p>
+    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/1069.jpg" alt="Blau-Weiss Friedrichshain Football Match - Sports Photography Berlin by Arpith Binsa">
+    <div class="hero-overlay">
+        <h1 class="album-title">
+            <span class="sr-only">Berlin Sports Photography - </span>
+            BLAU-WEISS FRIEDRICHSHAIN
+        </h1>
+        <p class="album-date">2025/08 - 2025/11</p>
             <div class="share-info">
                 <div class="share-badge">
                     <span>📷</span>
@@ -311,12 +328,17 @@ for (let i = startNum; i <= endNum; i++) {
     const img = document.createElement('img');
     const highQualityNum = 1000 + i;
     
-    // Low quality thumbnail for grid (auto-compressed by Cloudinary)
+    // Low quality thumbnail
     img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/${highQualityNum}.jpg`;
-    img.alt = `Photo ${i}`;
+
+    // SEO STRATEGY: Mixed keywords including the Club Name
+    img.alt = (i % 2 === 0) 
+        ? `Blau-Weiss Friedrichshain Sports Photographer Berlin - Arpith Binsa #${i}` 
+        : `Berlin Football Photography - Blau-Weiss Friedrichshain Action Shot #${i}`;
+
     img.loading = 'lazy';
     
-    // High quality for lightbox (full resolution)
+    // High quality for lightbox
     img.dataset.fullUrl = `${cloudinaryBase}${highQualityNum}.jpg`;
     
     img.onerror = function() { gridItem.style.display = 'none'; };

@@ -3,7 +3,7 @@
 <head>
     <title>Sports Photographer Berlin | Fashion & Editorial | ARPITH</title>
     <meta name="keywords" content="Sports Photographer Berlin, Berlin Sports Photography, Football Photographer Berlin, Arpith Binsa, Fashion Photographer Berlin">
-    <meta name="description" content="Arpith Binsa is a freelance sports and fashion photographer based in Berlin, specializing in capturing raw intensity and street style. Book for collaborations and commercial projects.">
+    <meta name="description" content="Arpith Binsa offers professional sports photography and fashion editorials in Berlin. capturing raw intensity, football action, and street style.">
     <link rel="canonical" href="https://www.arpithbinsa.com/" />
     <meta name="google-site-verification" content="google33235194ebadbb76" />
     <link rel="icon" type="image/png" href="/favicon.png">
@@ -758,7 +758,7 @@
             <!-- Album 1 -->
             <div class="album-card">
                 <div class="album-image">
-                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/1069.jpg" alt="Professional sports photography of Blau-Weiss Friedrichshain football match in Berlin by Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/1069.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="album-overlay"></div>
                 </div>
                 <div class="album-info">
@@ -782,7 +782,7 @@
             <!-- Album 2 -->
             <div class="album-card">
                 <div class="album-image">
-                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/2017.jpg" alt="Action shots of Gisma FC football match, Berlin sports photographer Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/2017.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="album-overlay"></div>
                 </div>
                 <div class="album-info">
@@ -806,7 +806,7 @@
             <!-- Album 3 -->
             <div class="album-card">
                 <div class="album-image">
-                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/3035.jpg" alt="Fashion Photographer Berlin" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/3035.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="album-overlay"></div>
                 </div>
                 <div class="album-info">
@@ -830,7 +830,7 @@
             <!-- Album 4 -->
             <div class="album-card">
                 <div class="album-image">
-                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/4001.jpg" alt="Freelance Photographer Berlin" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/4001.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
                     <div class="album-overlay"></div>
                 </div>
                 <div class="album-info">
@@ -906,7 +906,7 @@
 
     <!-- Footer -->
     <footer>
-        <div><strong>Arpith Binsa</strong> | Sports Photographer Berlin © 2025</div>
+        <div><strong>Arpith Binsa</strong> | SportsPhotographer Berlin © 2025</div>
         <ul class="footer-links">
             <li><a href="/blog">Blog</a></li>
             <li><a href="/reviews">Reviews</a></li>
@@ -989,87 +989,105 @@
 
         // LOAD CAROUSEL IMAGES
         function loadCarouselImages() {
-            // Track 1: 100-165 (Sports)
-            const track1 = document.querySelector('.carousel-track-1');
-            for (let i = 1; i <= 65; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track1.appendChild(img);
-            }
-            // Duplicate
-            for (let i = 100; i <= 165; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track1.appendChild(img);
-            }
+    // Track 1: 100-165 (Sports)
+    const track1 = document.querySelector('.carousel-track-1');
+    for (let i = 1; i <= 65; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Even = Photographer, Odd = Photography
+        img.alt = (i % 2 === 0) 
+            ? `Sports Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Sports Photography Berlin Action Shot - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 100; i <= 165; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Even = Photographer, Odd = Photography
+        img.alt = (i % 2 === 0) 
+            ? `Sports Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Sports Photography Berlin Action Shot - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
 
-            // Track 2: 300-322 (Personal)
-            const track2 = document.querySelector('.carousel-track-2');
-            for (let i = 300; i <= 322; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track2.appendChild(img);
-            }
-            // Duplicate
-            for (let i = 300; i <= 322; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track2.appendChild(img);
-            }
+    // Track 2: 300-322 (Personal/Editorial)
+    const track2 = document.querySelector('.carousel-track-2');
+    for (let i = 300; i <= 322; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Editorial keywords
+        img.alt = (i % 2 === 0) 
+            ? `Editorial Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Creative Photography Berlin Personal Work - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 300; i <= 322; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Editorial keywords
+        img.alt = (i % 2 === 0) 
+            ? `Editorial Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Creative Photography Berlin Personal Work - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
 
-            // Track 3: 200-247 (Fashion)
-            const track3 = document.querySelector('.carousel-track-3');
-            for (let i = 200; i <= 247; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track3.appendChild(img);
-            }
-            // Duplicate
-            for (let i = 200; i <= 247; i++) {
-                const img = document.createElement('img');
-                img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
-                img.loading = "lazy";
-                img.alt = `Photo ${i}`;
-                img.onerror = function() { this.style.display = 'none'; };
-                track3.appendChild(img);
-            }
+    // Track 3: 200-247 (Fashion)
+    const track3 = document.querySelector('.carousel-track-3');
+    for (let i = 200; i <= 247; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Fashion keywords
+        img.alt = (i % 2 === 0) 
+            ? `Fashion Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Berlin Fashion Photography and Street Style - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 200; i <= 247; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Fashion keywords
+        img.alt = (i % 2 === 0) 
+            ? `Fashion Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Berlin Fashion Photography and Street Style - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
 
-            // Click handlers
-            setTimeout(() => {
-                document.querySelectorAll('.carousel-track-1 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = '/photography/album-1';
-                    });
-                });
-                document.querySelectorAll('.carousel-track-2 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = '/photography/album-4';
-                    });
-                });
-                document.querySelectorAll('.carousel-track-3 img').forEach(img => {
-                    img.addEventListener('click', () => {
-                        window.location.href = '/photography/album-3';
-                    });
-                });
-            }, 100);
-        }
+    // Click handlers
+    setTimeout(() => {
+        document.querySelectorAll('.carousel-track-1 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-1';
+            });
+        });
+        document.querySelectorAll('.carousel-track-2 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-4';
+            });
+        });
+        document.querySelectorAll('.carousel-track-3 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-3';
+            });
+        });
+    }, 100);
+}
 
-        loadCarouselImages();
+loadCarouselImages();
 
 
         // LOAD REVIEWS

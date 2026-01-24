@@ -5,7 +5,10 @@
     <link rel="apple-touch-icon" href="/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GISMA FC - ARPITH</title>
+    <title>Gisma FC | Berlin Sports Photographer | ARPITH</title>
+    <meta name="description" content="Action shots from Gisma FC university league football in Berlin. Captured by sports photographer Arpith Binsa. High-quality match photography and player portraits.">
+    <link rel="canonical" href="https://www.arpithbinsa.com/photography/album-2/">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -201,6 +204,18 @@
             font-size: 1.5rem;
         }
 
+        .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
         /* Mobile Responsive - Smaller Images */
@@ -253,18 +268,21 @@
     </a>
 
     <div class="hero-image">
-        <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/2017.jpg" alt="GISMA FC">
-        <div class="hero-overlay">
-            <h1 class="album-title">GISMA FC</h1>
-            <p class="album-date">2025/05 - .......</p>
-            <div class="share-info">
-                <div class="share-badge">
-                    <span>📷</span>
-                    <span>31 Photos</span>
-                </div>
+    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/2017.jpg" alt="Gisma FC Football Match - Berlin Sports Photography by Arpith Binsa">
+    <div class="hero-overlay">
+        <h1 class="album-title">
+            <span class="sr-only">University Football Photography Berlin - </span>
+            GISMA FC
+        </h1>
+        <p class="album-date">2025/05 - Present</p>
+        <div class="share-info">
+            <div class="share-badge">
+                <span>📷</span>
+                <span>31 Photos</span>
             </div>
         </div>
     </div>
+</div>
 
     <section class="photo-grid">
         <div class="grid-container" id="photoContainer">
@@ -282,6 +300,7 @@
     <script>
         // AUTO-GENERATE IMAGES 1-100
    // AUTO-GENERATE IMAGES 1-100
+// AUTO-GENERATE IMAGES 1-100
 const photoContainer = document.getElementById('photoContainer');
 const startNum = 1;
 const endNum = 100;
@@ -294,12 +313,17 @@ for (let i = startNum; i <= endNum; i++) {
     const img = document.createElement('img');
     const highQualityNum = 2000 + i;
     
-    // Low quality thumbnail for grid (auto-compressed by Cloudinary)
+    // Low quality thumbnail for grid
     img.src = `${cloudinaryBase}w_600,q_auto,f_jpg/${highQualityNum}.jpg`;
-    img.alt = `Photo ${i}`;
+
+    // SEO STRATEGY: Alternating Keywords for University Sports
+    img.alt = (i % 2 === 0) 
+        ? `Gisma FC - Sports Photographer Berlin - Arpith Binsa #${i}` 
+        : `Berlin University Football Photography - Gisma FC Action #${i}`;
+
     img.loading = 'lazy';
     
-    // High quality for lightbox (full resolution)
+    // High quality for lightbox
     img.dataset.fullUrl = `${cloudinaryBase}${highQualityNum}.jpg`;
     
     img.onerror = function() { gridItem.style.display = 'none'; };
