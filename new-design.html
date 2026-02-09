@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sports Photographer Berlin | Fashion & Editorial | ARPITH</title>
+    <meta name="keywords" content="Sports Photographer Berlin, Berlin Sports Photography, Football Photographer Berlin, Arpith Binsa, Fashion Photographer Berlin">
+    <meta name="description" content="Arpith Binsa offers professional sports photography and fashion editorials in Berlin. capturing raw intensity, football action, and street style.">
+    <link rel="canonical" href="https://www.arpithbinsa.com/" />
+    <meta name="google-site-verification" content="google33235194ebadbb76" />
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* --- SONY THEME PALETTE --- */
+        :root {
+            --bg-color: #F5F5F7;         /* Platinum Grey */
+            --card-bg: #FFFFFF;          /* Pure White */
+            --text-main: #1D1D1F;        /* Matte Black */
+            --text-muted: #86868B;       /* Technical Grey */
+            --accent: #E95420;           /* Sony Orange */
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-hover: 0 20px 40px rgba(233, 84, 32, 0.15); /* Orange tinted shadow */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85); /* Frosted White */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);          
+            text-decoration: none;    
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            position: relative;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 8rem 4rem 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            color: var(--text-main);
+        }
+
+        .hero h1 .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .hero h1 .word:nth-child(1) { animation-delay: 0.1s; }
+        .hero h1 .word:nth-child(2) { animation-delay: 0.2s; }
+        .hero h1 .word:nth-child(3) { animation-delay: 0.3s; }
+        .hero h1 .word:nth-child(4) { animation-delay: 0.4s; }
+        .hero h1 .word:nth-child(5) { animation-delay: 0.5s; color: var(--accent); }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Albums Grid Section */
+        .albums-section {
+            padding: 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .album-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: var(--shadow-soft);
+            z-index: 1;
+            border: 1px solid rgba(0,0,0,0.05); /* Subtle border for structure */
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            z-index: 10;
+            border-color: rgba(233, 84, 32, 0.3); /* Orange rim on hover */
+        }
+
+        .album-image {
+            width: 100%;
+            height: 400px;
+            background: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .album-image img {
+            transition: transform 0.6s ease;
+        }
+
+        .album-card:hover .album-image img {
+            transform: scale(1.1);
+        }
+
+        .album-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent); /* Brighter shimmer for white */
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .album-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent); /* Dark gradient so white text pops on image */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .album-card:hover .album-overlay {
+            opacity: 1;
+        }
+
+        .album-info {
+            padding: 2rem;
+            overflow: hidden;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .album-number {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .album-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .album-description {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .album-stats {
+            display: flex;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-collection {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .view-collection:hover {
+            transform: translateX(5px);
+        }
+
+        /* Carousel Section */
+        .carousel-section {
+            padding: 4rem 0;
+            background: #fff; /* White background for carousel strip */
+            overflow: hidden;
+        }
+
+        .carousel-row {
+            display: flex;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .carousel-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .carousel-track-1 { animation: scrollRight 140s linear infinite; }
+        .carousel-track-2 { animation: scrollLeft 100s linear infinite; }
+        .carousel-track-3 { animation: scrollRight 80s linear infinite; }
+
+        .carousel-track img {
+            height: 250px;
+            width: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
+            /* Shadow makes images pop on white */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        .carousel-track img:hover {
+            transform: scale(1.05) translateZ(0);
+            box-shadow: 0 15px 30px rgba(233, 84, 32, 0.3); /* Orange glow on hover */
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        @keyframes scrollRight { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+        @keyframes scrollLeft { 0% { transform: translate3d(-50%, 0, 0); } 100% { transform: translate3d(0, 0, 0); } }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-color);
+        }
+
+        .reviews-section .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .reviews-carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .reviews-carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .reviews-carousel-card {
+            min-width: 100%;
+            padding: 0 2rem;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        .reviews-review-card {
+            background: #FFFFFF;
+            color: var(--text-main);
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-soft);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .reviews-stars {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .reviews-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+            text-align: center;
+            font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .reviews-author {
+            text-align: center;
+        }
+
+        .reviews-author-photo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .reviews-author-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .reviews-author-position {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .reviews-carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .reviews-carousel-btn {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid rgba(0,0,0,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .reviews-carousel-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .reviews-carousel-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .reviews-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d1d6; /* Light grey dots */
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reviews-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .see-all-reviews-btn {
+            padding: 1.2rem 3rem;
+            background: #fff;
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 3rem auto 0;
+            display: block;
+            width: fit-content;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .see-all-reviews-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            min-height: 70vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 8rem 4rem;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .contact-text {
+            position: relative;
+            padding: 4rem;
+            border-radius: 20px;
+            background-image: url('https://res.cloudinary.com/du0tvwlwp/image/upload/c_fill,w_600,h_600,g_face,ar_1:1/v1763416728/bg-masthead_ahw1ui.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 0, 0.7); /* Keep dark for contrast with white text */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-text h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+        }
+
+        .contact-text p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            background: #ffffff;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.8s;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            z-index: -1;
+            transition: left 0.8s ease;
+        }
+
+        .contact-btn:hover {
+            color: #fff;
+        }
+
+        .contact-btn:hover::before {
+            left: 0;
+        }
+
+        .contact-btn span {
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover span {
+            transform: translateX(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: #111; /* Keep footer dark for grounding */
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .albums-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.7rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .albums-section {
+                padding: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .album-title {
+                font-size: 1.5rem;
+            }
+
+            .reviews-carousel-card {
+                padding: 0 1rem;
+            }
+
+            .reviews-review-card {
+                padding: 1.5rem;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+                padding: 4rem 2rem;
+            }
+
+            .contact-text h2 {
+                font-size: 2.5rem;
+            }
+
+            .contact-btn {
+                font-size: 1.2rem;
+                padding: 1.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">ARPITH</a>
+        <ul class="nav-links">
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+    <h1>
+    <span class="word">TURNING</span>
+    <span class="word">MOMENTS</span>
+    <span class="word">INTO</span>
+    <br>
+    <span class="word">LEGACY</span>
+    
+    <span class="sr-only">Arpith Binsa: The Leading Sports Photographer in Berlin specializing in Football and Action Photography.</span>
+</h1>
+        <p>Sports. Fashion. Life. Through My lens.</p>
+    </section>
+
+    <section class="albums-section" id="photography">
+        <div class="section-header">
+            <h2>COLLECTIONS</h2>
+            <p>Explore my work across different categories</p>
+        </div>
+
+        <div class="albums-grid">
+            <div class="album-card">
+                <div class="album-image">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/1069.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="album-overlay"></div>
+                </div>
+                <div class="album-info">
+                    <div class="album-number">01</div>
+                    <h3 class="album-title">Blau-Weiss Friedrichshain</h3>
+                    <p class="album-description">Capturing the raw intensity and passion of Berlin's emerging football scene.</p>
+                    <div class="album-stats">
+                        <div class="stat">
+                            <span>📷</span>
+                            <span>105 shots</span>
+                        </div>
+                        <div class="stat">
+                            <span>🏷️</span>
+                            <span>Sports</span>
+                        </div>
+                    </div>
+                    <a href="/photography/album-1" class="view-collection">VIEW COLLECTION →</a>
+                </div>
+            </div>
+
+            <div class="album-card">
+                <div class="album-image">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/v1763402132/2017.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa"class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="album-overlay"></div>
+                </div>
+                <div class="album-info">
+                    <div class="album-number">02</div>
+                    <h3 class="album-title">Gisma FC</h3>
+                    <p class="album-description">Through the seasons with GISMA FC. University league football.</p>
+                    <div class="album-stats">
+                        <div class="stat">
+                            <span>📷</span>
+                            <span>31 shots</span>
+                        </div>
+                        <div class="stat">
+                            <span>🏷️</span>
+                            <span>Sports</span>
+                        </div>
+                    </div>
+                    <a href="/photography/album-2" class="view-collection">VIEW COLLECTION →</a>
+                </div>
+            </div>
+
+            <div class="album-card">
+                <div class="album-image">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/3035.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="album-overlay"></div>
+                </div>
+                <div class="album-info">
+                    <div class="album-number">03</div>
+                    <h3 class="album-title">Fashion</h3>
+                    <p class="album-description">Fashion photography. Street style and studio work.</p>
+                    <div class="album-stats">
+                        <div class="stat">
+                            <span>📷</span>
+                            <span>39 shots</span>
+                        </div>
+                        <div class="stat">
+                            <span>🏷️</span>
+                            <span>Fashion</span>
+                        </div>
+                    </div>
+                    <a href="/photography/album-3" class="view-collection">VIEW COLLECTION →</a>
+                </div>
+            </div>
+
+            <div class="album-card">
+                <div class="album-image">
+                    <img src="https://res.cloudinary.com/du0tvwlwp/image/upload/w_1920,q_auto,f_jpg/v1763400745/4001.jpg" alt="Action sports photography Berlin - shot by Arpith Binsa" class="zoom" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="album-overlay"></div>
+                </div>
+                <div class="album-info">
+                    <div class="album-number">04</div>
+                    <h3 class="album-title">Personal Work</h3>
+                    <p class="album-description">Experimental projects, candid moments, automotive, all shot just for the love of photography.</p>
+                    <div class="album-stats">
+                        <div class="stat">
+                            <span>📷</span>
+                            <span>22 shots</span>
+                        </div>
+                        <div class="stat">
+                            <span>🏷️</span>
+                            <span>Editorial</span>
+                        </div>
+                    </div>
+                    <a href="/photography/album-4" class="view-collection">VIEW COLLECTION →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-row">
+            <div class="carousel-track carousel-track-1"></div>
+        </div>
+
+        <div class="carousel-row">
+            <div class="carousel-track carousel-track-2"></div>
+        </div>
+
+        <div class="carousel-row">
+            <div class="carousel-track carousel-track-3"></div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="reviews">
+        <div class="section-header">
+            <h2>REVIEWS</h2>
+        </div>
+
+        <div class="reviews-carousel-container" id="reviewsCarouselContainer">
+            <div class="reviews-carousel-wrapper" id="reviewsCarouselWrapper"></div>
+        </div>
+        <div class="reviews-carousel-controls" id="reviewsCarouselControls"></div>
+
+        <a href="/reviews" class="see-all-reviews-btn">See All Reviews →</a>
+    </section>
+    
+    <section class="contact-section" id="contact">
+        <div class="contact-text">
+            <h2>LET'S WORK<br>TOGETHER</h2>
+            <p>Available for freelance photography projects, collaborations, and commissions. Get in touch to discuss your next project.</p>
+        </div>
+        <div class="contact-buttons">
+            <a href="/cdn-cgi/l/email-protection#2243464f4b4c624350524b564a404b4c51430c414d4f" class="contact-btn">
+                <span>📧 Email Me</span>
+                <span>→</span>
+            </a>
+            <a href="https://www.instagram.com/arpith_knipst" target="_blank" rel="noopener noreferrer" class="contact-btn">
+                <span>📷 Instagram</span>
+                <span>→</span>
+            </a>
+            <a href="/contact" class="contact-btn">
+                <span>💬 Contact Form</span>
+                <span>→</span>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div><strong>Arpith Binsa</strong> | Sports Photographer Berlin © 2025</div>
+        <ul class="footer-links">
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </footer>
+
+    <div id="kofi-trigger" style="position: fixed; bottom: -200px; right: 20px; z-index: 9999; transition: bottom 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);">
+        <button id="kofi-btn" style="background: #ffffff; border: 2px solid #E95420; border-radius: 50px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; box-shadow: 0 10px 40px rgba(233, 84, 32, 0.4), 0 0 30px rgba(233, 84, 32, 0.3); font-family: Inter, sans-serif; position: relative; overflow: hidden;">
+            <span id="kofi-icon" style="font-size: 2rem;">☕</span>
+            <span style="color: #1D1D1F; font-size: 1rem; font-weight: 700;">Like my work? You can buy me a coffee!</span>
+            <span id="kofi-pulse" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50px; background: rgba(233, 84, 32, 0.2); animation: pulse 2s infinite;"></span>
+        </button>
+    </div>
+
+    <div id="kofi-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; align-items: center; justify-content: center;">
+        <div id="kofi-backdrop" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);"></div>
+        <div style="position: relative; z-index: 10001; max-width: 500px; width: 90%; background: #f9f9f9; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(233, 84, 32, 0.5);">
+            <button id="kofi-close" style="position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.6); border: none; color: #fff; font-size: 1.8rem; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; z-index: 10002; display: flex; align-items: center; justify-content: center;">×</button>
+            <iframe src="https://ko-fi.com/arpithbinsa/?hidefeed=true&widget=true&embed=true" style="border:none; width:100%; background:#f9f9f9;" height="712" title="Support Arpith"></iframe>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(0deg); }
+            10% { transform: translateY(-20px) rotate(-5deg); }
+            30% { transform: translateY(-15px) rotate(5deg); }
+            40% { transform: translateY(-10px) rotate(-3deg); }
+            60% { transform: translateY(-5px) rotate(3deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) rotate(-2deg); }
+            20%, 40%, 60%, 80% { transform: translateX(5px) rotate(2deg); }
+        }
+
+        @keyframes steam {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(233, 84, 32, 0.4), 0 0 30px rgba(233, 84, 32, 0.3); }
+            50% { box-shadow: 0 10px 60px rgba(233, 84, 32, 0.8), 0 0 50px rgba(233, 84, 32, 0.6), 0 0 80px rgba(233, 84, 32, 0.4); }
+        }
+
+        #kofi-btn.first-appear {
+            animation: bounce 1.5s ease-out, glow 2s infinite;
+        }
+
+        #kofi-btn.first-appear #kofi-icon {
+            animation: steam 1s infinite;
+        }
+
+        #kofi-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(233, 84, 32, 0.6), 0 0 40px rgba(233, 84, 32, 0.5);
+        }
+    </style>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active nav
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Album card click
+        document.querySelectorAll('.album-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('view-collection')) {
+                    const link = this.querySelector('.view-collection');
+                    if (link) {
+                        window.location.href = link.getAttribute('href');
+                    }
+                }
+            });
+        });
+
+        // Intersection observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.album-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // LOAD CAROUSEL IMAGES
+        function loadCarouselImages() {
+    // Track 1: 100-165 (Sports)
+    const track1 = document.querySelector('.carousel-track-1');
+    for (let i = 1; i <= 65; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Even = Photographer, Odd = Photography
+        img.alt = (i % 2 === 0) 
+            ? `Sports Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Sports Photography Berlin Action Shot - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 100; i <= 165; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Even = Photographer, Odd = Photography
+        img.alt = (i % 2 === 0) 
+            ? `Sports Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Sports Photography Berlin Action Shot - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track1.appendChild(img);
+    }
+
+    // Track 2: 300-322 (Personal/Editorial)
+    const track2 = document.querySelector('.carousel-track-2');
+    for (let i = 300; i <= 322; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Editorial keywords
+        img.alt = (i % 2 === 0) 
+            ? `Editorial Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Creative Photography Berlin Personal Work - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 300; i <= 322; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Editorial keywords
+        img.alt = (i % 2 === 0) 
+            ? `Editorial Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Creative Photography Berlin Personal Work - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track2.appendChild(img);
+    }
+
+    // Track 3: 200-247 (Fashion)
+    const track3 = document.querySelector('.carousel-track-3');
+    for (let i = 200; i <= 247; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Fashion keywords
+        img.alt = (i % 2 === 0) 
+            ? `Fashion Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Berlin Fashion Photography and Street Style - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
+    // Duplicate
+    for (let i = 200; i <= 247; i++) {
+        const img = document.createElement('img');
+        img.src = `https://res.cloudinary.com/du0tvwlwp/image/upload/f_jpg,q_auto,w_800/${i}.jpg`;
+        img.loading = "lazy";
+        // ALTERNATE: Fashion keywords
+        img.alt = (i % 2 === 0) 
+            ? `Fashion Photographer Berlin - Arpith Binsa - Shot ${i}` 
+            : `Berlin Fashion Photography and Street Style - ${i}`;
+        img.onerror = function() { this.style.display = 'none'; };
+        track3.appendChild(img);
+    }
+
+    // Click handlers
+    setTimeout(() => {
+        document.querySelectorAll('.carousel-track-1 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-1';
+            });
+        });
+        document.querySelectorAll('.carousel-track-2 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-4';
+            });
+        });
+        document.querySelectorAll('.carousel-track-3 img').forEach(img => {
+            img.addEventListener('click', () => {
+                window.location.href = '/photography/album-3';
+            });
+        });
+    }, 100);
+}
+
+loadCarouselImages();
+
+
+        // LOAD REVIEWS
+        let reviewsCurrentSlide = 0;
+        let reviewsCarouselInterval;
+
+        async function loadReviewsCarousel() {
+            try {
+                const response = await fetch(`https://raw.githubusercontent.com/Arpith-binsa/Portfolio-Gisma/main/reviews-data.json?nocache=${Date.now()}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const featuredReviews = data.reviews.filter(r => r.featured).slice(0, 3);
+                    
+                    if (featuredReviews.length > 0) {
+                        renderReviewsCarousel(featuredReviews);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+            }
+        }
+
+        function renderReviewsCarousel(reviews) {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            wrapper.innerHTML = reviews.map(review => `
+                <div class="reviews-carousel-card">
+                    <div class="reviews-review-card">
+                        <div>
+                            <div class="reviews-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                            <div class="reviews-text">"${review.text}"</div>
+                        </div>
+                        <div class="reviews-author">
+                            ${review.photo ? `<img src="${review.photo}" class="reviews-author-photo" alt="${review.name}">` : ''}
+                            <div class="reviews-author-name">${review.name}</div>
+                            ${review.position ? `<div class="reviews-author-position">${review.position}</div>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (reviews.length > 1) {
+                renderReviewsCarouselControls(reviews.length);
+                startReviewsCarousel();
+            }
+        }
+
+        function renderReviewsCarouselControls(count) {
+            const controls = document.getElementById('reviewsCarouselControls');
+            controls.innerHTML = `
+                <button class="reviews-carousel-btn" onclick="previousReviewsSlide()">←</button>
+                <div class="reviews-carousel-dots">
+                    ${Array(count).fill(0).map((_, i) => `<div class="reviews-dot ${i === 0 ? 'active' : ''}" onclick="goToReviewsSlide(${i})"></div>`).join('')}
+                </div>
+                <button class="reviews-carousel-btn" onclick="nextReviewsSlide()">→</button>
+            `;
+        }
+
+        function startReviewsCarousel() {
+            stopReviewsCarousel();
+            reviewsCarouselInterval = setInterval(nextReviewsSlide, 6000);
+        }
+
+        function stopReviewsCarousel() {
+            clearInterval(reviewsCarouselInterval);
+        }
+
+        function nextReviewsSlide() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            const totalSlides = wrapper.children.length;
+            if (totalSlides === 0) return;
+
+            reviewsCurrentSlide = (reviewsCurrentSlide + 1) % totalSlides;
+            updateReviewsCarousel();
+        }
+
+        function previousReviewsSlide() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            const totalSlides = wrapper.children.length;
+            if (totalSlides === 0) return;
+
+            reviewsCurrentSlide = (reviewsCurrentSlide - 1 + totalSlides) % totalSlides;
+            updateReviewsCarousel();
+        }
+
+        function goToReviewsSlide(index) {
+            reviewsCurrentSlide = index;
+            updateReviewsCarousel();
+            startReviewsCarousel();
+        }
+
+        function updateReviewsCarousel() {
+            const wrapper = document.getElementById('reviewsCarouselWrapper');
+            wrapper.style.transform = `translate3d(-${reviewsCurrentSlide * 100}%, 0, 0)`;
+
+            document.querySelectorAll('.reviews-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === reviewsCurrentSlide);
+            });
+        }
+
+        // Load reviews on page load
+        loadReviewsCarousel();
+
+        // Pause reviews carousel on hover
+        document.querySelector('.reviews-carousel-container')?.addEventListener('mouseenter', stopReviewsCarousel);
+        document.querySelector('.reviews-carousel-container')?.addEventListener('mouseleave', startReviewsCarousel);
+
+        // Email copy
+        document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
+            const email = 'admin@arpithbinsa.com';
+            
+            navigator.clipboard.writeText(email).then(() => {
+                setTimeout(() => {
+                    const toast = document.createElement('div');
+                    toast.textContent = '📧 Email copied to clipboard!';
+                    toast.style.cssText = `
+                        position: fixed;
+                        bottom: 30px;
+                        right: 30px;
+                        background: #E95420;
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        font-weight: 700;
+                        z-index: 10000;
+                        animation: slideIn 0.3s ease;
+                    `;
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes slideIn {
+                            from { transform: translateX(400px); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                        @keyframes slideOut {
+                            from { transform: translateX(0); opacity: 1; }
+                            to { transform: translateX(400px); opacity: 0; }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    document.body.appendChild(toast);
+                    
+                    setTimeout(() => {
+                        toast.style.animation = 'slideOut 0.3s ease';
+                        setTimeout(() => toast.remove(), 300);
+                    }, 3000);
+                }, 1000);
+            }).catch(err => {
+                console.error('Could not copy email: ', err);
+            });
+            e.preventDefault();
+        });
+
+        // KO-FI WIDGET LOGIC
+        (function() {
+            var trigger = document.getElementById('kofi-trigger');
+            var btn = document.getElementById('kofi-btn');
+            var overlay = document.getElementById('kofi-overlay');
+            var backdrop = document.getElementById('kofi-backdrop');
+            var closeBtn = document.getElementById('kofi-close');
+            var shown = false;
+            var firstAppear = true;
+            
+            // Show/hide trigger based on scroll position
+            window.addEventListener('scroll', function() {
+                var scrollHeight = document.documentElement.scrollHeight;
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                var clientHeight = document.documentElement.clientHeight;
+                var scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+                
+                // Show at 50% scroll
+                if (scrollPercent >= 50 && !shown) {
+                    trigger.style.bottom = '20px';
+                    shown = true;
+                    
+                    // Add attention-grabbing animation on first appear
+                    if (firstAppear) {
+                        btn.classList.add('first-appear');
+                        firstAppear = false;
+                        
+                        // Add shake after bounce
+                        setTimeout(function() {
+                            btn.style.animation = 'shake 0.5s ease-in-out';
+                        }, 1500);
+                        
+                        // Remove animation classes after they finish
+                        setTimeout(function() {
+                            btn.classList.remove('first-appear');
+                            btn.style.animation = '';
+                        }, 3000);
+                    }
+                }
+                
+                // Hide when scrolled back to top (less than 40%)
+                if (scrollPercent < 40 && shown) {
+                    trigger.style.bottom = '-200px';
+                    shown = false;
+                }
+            });
+            
+            // Open widget
+            btn.addEventListener('click', function() {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close widget
+            function closeWidget() {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeBtn.addEventListener('click', closeWidget);
+            backdrop.addEventListener('click', closeWidget);
+            
+            // ESC key close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeWidget();
+            });
+        })();
+    </script>
+</body>
+</html>
