@@ -891,7 +891,7 @@
             <p>Available for freelance photography projects, collaborations, and commissions. Get in touch to discuss your next project.</p>
         </div>
         <div class="contact-buttons">
-            <a href="/cdn-cgi/l/email-protection#2243464f4b4c624350524b564a404b4c51430c414d4f" class="contact-btn">
+            <a href="mailto:admin@arpithbinsa.com" class="contact-btn">
                 <span style="display:inline-flex;align-items:center;gap:0.6rem;"><img src="/assets/gmail.png" alt="Gmail" width="26" height="26" style="flex-shrink:0;object-fit:contain;">Email Me</span>
                 <span>→</span>
             </a>
@@ -1196,10 +1196,10 @@ loadCarouselImages();
         document.querySelector('.reviews-carousel-container')?.addEventListener('mouseenter', stopReviewsCarousel);
         document.querySelector('.reviews-carousel-container')?.addEventListener('mouseleave', startReviewsCarousel);
 
-        // Email copy
+        // Email copy (also opens email app via mailto href)
         document.querySelector('a[href^="mailto:"]').addEventListener('click', function(e) {
             const email = 'admin@arpithbinsa.com';
-            
+
             navigator.clipboard.writeText(email).then(() => {
                 setTimeout(() => {
                     const toast = document.createElement('div');
@@ -1216,7 +1216,7 @@ loadCarouselImages();
                         z-index: 10000;
                         animation: slideIn 0.3s ease;
                     `;
-                    
+
                     const style = document.createElement('style');
                     style.textContent = `
                         @keyframes slideIn {
@@ -1229,9 +1229,9 @@ loadCarouselImages();
                         }
                     `;
                     document.head.appendChild(style);
-                    
+
                     document.body.appendChild(toast);
-                    
+
                     setTimeout(() => {
                         toast.style.animation = 'slideOut 0.3s ease';
                         setTimeout(() => toast.remove(), 300);
@@ -1240,7 +1240,6 @@ loadCarouselImages();
             }).catch(err => {
                 console.error('Could not copy email: ', err);
             });
-            e.preventDefault();
         });
     </script>
 
