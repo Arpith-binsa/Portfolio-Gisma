@@ -1,0 +1,34 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "bwf_tracker": {
+      "players": {
+        ".read": "auth != null",
+        "$pid": {
+          ".write": "auth != null && newData.exists() && $pid.matches(/^(linus|daniel_gk|christoph_a|youssef|finn|tobias|alex|robert|richard|balthasar|marius|devon|devin|craig|mehtab|lukas_wenger|lukas_enzweiler|christophe|moritz_k|moritz_a|ivo|sven|joseph|philipp_weber|philipp_saenger|david|hamado|bato|paul|hardy|niclas_g|niklas_trung|florian_s|patrick_coach|christian_gk|pablo_gk)$/) && newData.parent().parent().child('throttle').child(auth.uid).val() === now",
+          ".validate": "newData.hasChildren(['a', 'c', 't'])",
+          "a": {
+            ".validate": "newData.isBoolean()"
+          },
+          "c": {
+            ".validate": "newData.isBoolean()"
+          },
+          "t": {
+            ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 300)"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "throttle": {
+        "$uid": {
+          ".read": "auth != null && auth.uid === $uid",
+          ".write": "auth != null && auth.uid === $uid && newData.exists()",
+          ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 1000)"
+        }
+      }
+    }
+  }
+}

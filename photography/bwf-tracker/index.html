@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Shot list · BWF I</title>
+
+  <!--
+  SECURITY (OWASP (Open Worldwide Application Security Project) A05: Security Misconfiguration)
+  Content Security Policy: only this site, the pinned CDN (Content Delivery Network),
+  Google Fonts and Firebase's own endpoints may load code or be contacted.
+  No inline scripts or inline styles are allowed, which blocks most XSS (Cross-Site Scripting).
+-->
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'none';
+  script-src 'self' https://cdn.jsdelivr.net https://*.firebaseio.com https://*.firebasedatabase.app https://www.google.com https://www.gstatic.com;
+  style-src 'self' https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  img-src 'self' data:;
+  connect-src 'self' https://*.firebaseio.com wss://*.firebaseio.com https://*.firebasedatabase.app wss://*.firebasedatabase.app https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://firebaseappcheck.googleapis.com https://content-firebaseappcheck.googleapis.com https://www.google.com;
+  frame-src https://*.firebaseapp.com https://*.firebaseio.com https://*.firebasedatabase.app https://www.google.com https://recaptcha.google.com;
+  base-uri 'none';
+  form-action 'none';
+  object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Players' names and photos: keep this page out of search engines. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="theme-color" content="#FAF9FF">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+  <header class="masthead">
+    <div class="hero">
+      <!-- Soft blurred colour shapes behind the header (decorative) -->
+      <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="hero-top">
+        <p class="club">Blau-Weiß Friedrichshain I</p>
+        <p class="sync" id="sync" role="status"><span class="sync-dot"></span><span id="syncText">Connecting</span></p>
+      </div>
+      <h1>Shot list</h1>
+
+      <div class="tally">
+        <p class="tally-action"><span class="tally-num" id="countA">0</span><span class="tally-text">Action <span
+              class="tally-of">of <span class="js-total">0</span></span></span></p>
+        <p class="tally-celeb"><span class="tally-num" id="countC">0</span><span class="tally-text">Celebration <span
+              class="tally-of">of <span class="js-total">0</span></span></span></p>
+      </div>
+      <!-- One segment per player: top half = action, bottom half = celebration -->
+      <div class="reel" id="reel" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <nav class="toolbar" aria-label="Filter players">
+    <label class="search">
+      <span class="visually-hidden">Find a player</span>
+      <!-- Input validation: length capped here AND re-checked in app.js -->
+      <input id="search" type="search" inputmode="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+        maxlength="40" placeholder="Find a player">
+    </label>
+    <div class="filters" id="filters" role="tablist">
+      <button role="tab" data-filter="todo" aria-selected="true">To shoot <span class="n"></span></button>
+      <button role="tab" data-filter="done" aria-selected="false">Done <span class="n"></span></button>
+      <button role="tab" data-filter="clarify" aria-selected="false">Check names <span class="n"></span></button>
+      <button role="tab" data-filter="nophoto" aria-selected="false">No photo <span class="n"></span></button>
+      <button role="tab" data-filter="all" aria-selected="false">Everyone <span class="n"></span></button>
+    </div>
+  </nav>
+
+  <main>
+    <p class="notice" id="notice" hidden></p>
+    <ol class="sheet" id="sheet"></ol>
+    <p class="empty" id="empty" hidden></p>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span id="toastText"></span>
+    <button type="button" id="toastUndo" hidden>Undo</button>
+  </div>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="viewerName">
+    <button type="button" class="viewer-close" id="viewerClose" aria-label="Close photo">Close</button>
+    <div class="viewer-frame" id="viewerFrame">
+      <img id="viewerImg" alt="">
+    </div>
+    <p class="viewer-name" id="viewerName"></p>
+    <p class="viewer-hint">Tap the photo to zoom in. Pinch works too.</p>
+  </dialog>
+
+  <!--
+  SECURITY (OWASP A08: Software and Data Integrity Failures)
+  Firebase scripts are pinned to an exact version with SRI (Subresource Integrity) hashes,
+  so the browser refuses to run them if the CDN copy is ever tampered with.
+-->
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.0/firebase-app-compat.js"
+    integrity="sha384-sEVIly94UBRLKWdkYoPpSG7GD/e79YHMrxVyZaOk712Ga7+EAw6w1EFi+xBzBdd+" crossorigin="anonymous"
+    defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.0/firebase-auth-compat.js"
+    integrity="sha384-EkqK+ezBWJuvO3hfrSx2iVqr3YQbhmnzn8kPhOpBZ+0GMVU5oGSgptwIu8D84HjE" crossorigin="anonymous"
+    defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.0/firebase-database-compat.js"
+    integrity="sha384-1/m+A1jVWbD3yiK3/vtFvm1+LjK1WLpSoDY+Kaxppwn/yP9BVSgdHTNQVOjrzUO5" crossorigin="anonymous"
+    defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.0/firebase-app-check-compat.js"
+    integrity="sha384-E3vxFxXu8FhW5kvqdQJ5Yf8ugrV7iCJP8jgnItRH2Rk8Q08cJzJGTi/oMC3FEp3j" crossorigin="anonymous"
+    defer></script>
+
+  <!-- Your Firebase settings live in their own file, so you never have to touch the app code. -->
+  <script src="./config.js" defer></script>
+  <script src="./app.js" defer></script>
+</body>
+
+</html>
