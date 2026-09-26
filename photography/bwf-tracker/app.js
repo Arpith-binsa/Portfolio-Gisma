@@ -7,6 +7,7 @@
    - No secrets in this file. Firebase settings live in config.js and are public by design;
      the real protection is the database rules plus the API (Application Programming Interface)
      key restrictions described in README.md.
+   - Only accounts on the access list (bwf_tracker/allowed in the database) can read or write.
    ───────────────────────────────────────────────────────────── */
 (() => {
   "use strict";
@@ -197,6 +198,118 @@
     return cfg;
   }
 
+  /* ── Sign-in (username + password) ────────────────────────
+     Firebase needs an email-shaped login, so a username like "coach" becomes
+     "coach@shotlist.arpithbinsa.com". No email is ever sent to it.            */
+  const USERNAME_DOMAIN = "shotlist.arpithbinsa.com";
+  const USERNAME_RE = /^[a-z0-9._-]{3,24}$/;          // input validation: allowed characters + length
+  const PASSWORD_MIN = 8, PASSWORD_MAX = 128;
+  const LOCK_KEY = "bwf-signin-lock";
+
+  let auth = null;
+  let playersRef = null, connectedRef = null;
+
+  function showScreen(which) {             // "app" | "signin"
+    document.body.dataset.screen = which;
+  }
+
+  // Client-side login rate limit: after 3 failed tries, wait 15 s, then 30 s, 60 s … (max 15 min).
+  // Firebase also blocks repeated failures on its side; this just keeps the UI (user interface) calm.
+  function readLock() {
+    try {
+      const v = JSON.parse(sessionStorage.getItem(LOCK_KEY) || "{}");
+      return { fails: Number.isInteger(v.fails) ? v.fails : 0, until: Number.isFinite(v.until) ? v.until : 0 };
+    } catch { return { fails: 0, until: 0 }; }
+  }
+  function writeLock(l) { try { sessionStorage.setItem(LOCK_KEY, JSON.stringify(l)); } catch { /* ignore */ } }
+  function registerFailure() {
+    const l = readLock();
+    l.fails += 1;
+    if (l.fails >= 3) l.until = Date.now() + Math.min(15000 * 2 ** (l.fails - 3), 15 * 60 * 1000);
+    writeLock(l);
+    return l;
+  }
+
+  function signinError(text) {
+    const e = $("signinError");
+    e.textContent = text;
+    e.hidden = !text;
+  }
+
+  async function handleSignIn(ev) {
+    ev.preventDefault();
+    if (!auth) return;
+    const btn = $("signinBtn");
+    const lock = readLock();
+    if (lock.until > Date.now()) {
+      signinError("Too many tries. Wait " + Math.ceil((lock.until - Date.now()) / 1000) + " seconds and try again.");
+      return;
+    }
+
+    // Validate and normalise input. Reject anything outside the allowed shape before it leaves the phone.
+    const username = String($("signinUser").value || "").trim().toLowerCase();
+    const password = String($("signinPass").value || "");
+    if (!USERNAME_RE.test(username)) { signinError("Usernames are 3\u201324 characters: letters, numbers, dots, dashes or underscores."); return; }
+    if (password.length < PASSWORD_MIN || password.length > PASSWORD_MAX) { signinError("Password must be " + PASSWORD_MIN + "\u2013" + PASSWORD_MAX + " characters."); return; }
+
+    btn.disabled = true;
+    signinError("");
+    try {
+      await auth.signInWithEmailAndPassword(username + "@" + USERNAME_DOMAIN, password);
+      writeLock({ fails: 0, until: 0 });
+      $("signinPass").value = "";
+    } catch (err) {
+      const code = err && err.code;
+      if (code === "auth/too-many-requests") {
+        signinError("Too many tries from this phone. Wait a few minutes and try again.");     // graceful 429
+      } else if (code === "auth/network-request-failed") {
+        signinError("No connection. Check your signal and try again.");
+      } else {
+        const l = registerFailure();
+        // Same message for wrong username and wrong password, so usernames can't be guessed.
+        signinError(l.until > Date.now()
+          ? "Wrong username or password. Wait " + Math.ceil((l.until - Date.now()) / 1000) + " seconds before trying again."
+          : "Wrong username or password.");
+      }
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function stopListening() {
+    if (playersRef) playersRef.off();
+    if (connectedRef) connectedRef.off();
+    playersRef = connectedRef = null;
+    dbRoot = null;
+    uid = null;
+    mode = "local";
+  }
+
+  function startListening(user) {
+    uid = user.uid;
+    const db = firebase.database();
+    dbRoot = db.ref("bwf_tracker");
+    mode = "firebase";
+    $("whoami").textContent = (user.email || "").split("@")[0];
+
+    connectedRef = db.ref(".info/connected");
+    connectedRef.on("value", snap => setSync(snap.val() ? "live" : "offline"));
+    playersRef = dbRoot.child("players");
+    playersRef.on("value",
+      snap => { applyRemote(snap.val()); update(); },
+      err => {
+        if (err && /permission/i.test(String(err.code || err.message))) {
+          // Signed in, but this account isn't on the access list.
+          auth.signOut();
+          signinError("This account doesn\u2019t have access to the shot list.");
+        } else {
+          setSync("offline");
+          showToast("Couldn\u2019t read the shared list. Showing what this phone knows.");
+        }
+      }
+    );
+  }
+
   async function startFirebase(cfg) {
     if (typeof firebase === "undefined") throw new Error("Firebase scripts did not load");
     firebase.initializeApp(cfg.firebase);
@@ -206,19 +319,25 @@
       firebase.appCheck().activate(new firebase.appCheck.ReCaptchaV3Provider(cfg.appCheckSiteKey), true);
     }
 
-    // Anonymous sign-in gives every phone its own user id, used for per-user rate limiting in the rules.
-    const cred = await firebase.auth().signInAnonymously();
-    uid = cred.user.uid;
+    auth = firebase.auth();
+    // Stay signed in on this phone until you sign out (Firebase renews the session automatically).
+    await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-    const db = firebase.database();
-    dbRoot = db.ref("bwf_tracker");
-    mode = "firebase";
+    $("signinForm").addEventListener("submit", handleSignIn);
+    $("signout").addEventListener("click", () => { auth.signOut(); });
 
-    db.ref(".info/connected").on("value", snap => setSync(snap.val() ? "live" : "offline"));
-    dbRoot.child("players").on("value",
-      snap => { applyRemote(snap.val()); update(); },
-      () => { setSync("offline"); showToast("Couldn\u2019t read the shared list. Showing what this phone knows."); }
-    );
+    auth.onAuthStateChanged(user => {
+      if (user && !user.isAnonymous) {
+        showScreen("app");
+        startListening(user);
+      } else {
+        stopListening();
+        if (user && user.isAnonymous) auth.signOut();   // clear old anonymous sessions from the first version
+        showScreen("signin");
+        setSync("connecting");
+        setTimeout(() => { try { $("signinUser").focus({ preventScroll: true }); } catch { /* ignore */ } }, 50);
+      }
+    });
   }
 
   function setSync(s) {
@@ -472,6 +591,7 @@
 
     const cfg = readConfig();
     if (!cfg) {
+      showScreen("app");
       setSync("local");
       const n = $("notice");
       n.hidden = false;
@@ -479,7 +599,9 @@
       return;
     }
     setSync("connecting");
+    showScreen("loading");
     startFirebase(cfg).catch(() => {
+      showScreen("app");
       mode = "local";
       setSync("local");
       showToast("Couldn\u2019t reach the shared list. Ticks are saved on this phone for now.");

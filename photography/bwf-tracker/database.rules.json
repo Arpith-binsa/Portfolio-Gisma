@@ -4,9 +4,9 @@
     ".write": false,
     "bwf_tracker": {
       "players": {
-        ".read": "auth != null",
+        ".read": "auth != null && root.child('bwf_tracker').child('allowed').child(auth.uid).val() === true",
         "$pid": {
-          ".write": "auth != null && newData.exists() && $pid.matches(/^(linus|daniel_gk|christoph_a|youssef|finn|tobias|alex|robert|richard|balthasar|marius|devon|devin|craig|mehtab|lukas_wenger|lukas_enzweiler|christophe|moritz_k|moritz_a|ivo|sven|joseph|philipp_weber|philipp_saenger|david|hamado|bato|paul|hardy|niclas_g|niklas_k|trung|florian_s|patrick_coach|christian_gk|pablo_gk)$/) && newData.parent().parent().child('throttle').child(auth.uid).val() === now",
+          ".write": "auth != null && root.child('bwf_tracker').child('allowed').child(auth.uid).val() === true && newData.exists() && $pid.matches(/^(linus|daniel_gk|christoph_a|youssef|finn|tobias|alex|robert|richard|balthasar|marius|devon|devin|craig|mehtab|lukas_wenger|lukas_enzweiler|christophe|moritz_k|moritz_a|ivo|sven|joseph|philipp_weber|philipp_saenger|david|hamado|bato|paul|hardy|niclas_g|niklas_k|trung|florian_s|patrick_coach|christian_gk|pablo_gk)$/) && newData.parent().parent().child('throttle').child(auth.uid).val() === now",
           ".validate": "newData.hasChildren(['a', 'c', 't'])",
           "a": {
             ".validate": "newData.isBoolean()"
@@ -24,9 +24,16 @@
       },
       "throttle": {
         "$uid": {
-          ".read": "auth != null && auth.uid === $uid",
-          ".write": "auth != null && auth.uid === $uid && newData.exists()",
+          ".read": "auth != null && auth.uid === $uid && root.child('bwf_tracker').child('allowed').child(auth.uid).val() === true",
+          ".write": "auth != null && auth.uid === $uid && root.child('bwf_tracker').child('allowed').child(auth.uid).val() === true && newData.exists()",
           ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 1000)"
+        }
+      },
+      "allowed": {
+        ".read": false,
+        ".write": false,
+        "$uid": {
+          ".validate": "newData.isBoolean()"
         }
       }
     }

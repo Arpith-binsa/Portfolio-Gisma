@@ -38,6 +38,30 @@
 
 <body>
 
+  <!-- Sign-in screen (shown until this phone is signed in) -->
+  <section class="signin" id="signin" aria-labelledby="signinTitle">
+    <div class="signin-card">
+      <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+      <p class="club">Blau-Weiß Friedrichshain I</p>
+      <h1 id="signinTitle">Shot list</h1>
+      <p class="signin-lede">Sign in once on this phone and it stays signed in.</p>
+      <form id="signinForm" class="signin-form" novalidate>
+        <label class="field">
+          <span>Username</span>
+          <input id="signinUser" name="username" type="text" autocomplete="username" autocapitalize="none"
+            autocorrect="off" spellcheck="false" inputmode="text" maxlength="24" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input id="signinPass" name="password" type="password" autocomplete="current-password" maxlength="128"
+            required>
+        </label>
+        <p class="signin-error" id="signinError" role="alert" hidden></p>
+        <button type="submit" class="btn-filled" id="signinBtn">Sign in</button>
+      </form>
+    </div>
+  </section>
+
   <header class="masthead">
     <div class="hero">
       <!-- Soft blurred colour shapes behind the header (decorative) -->
@@ -48,6 +72,8 @@
         <p class="sync" id="sync" role="status"><span class="sync-dot"></span><span id="syncText">Connecting</span></p>
       </div>
       <h1>Shot list</h1>
+      <p class="account"><span id="whoami"></span><button type="button" id="signout" class="btn-text">Sign out</button>
+      </p>
 
       <div class="tally">
         <p class="tally-action"><span class="tally-num" id="countA">0</span><span class="tally-text">Action <span
