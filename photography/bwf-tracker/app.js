@@ -247,7 +247,13 @@
     }
 
     // Validate and normalise input. Reject anything outside the allowed shape before it leaves the phone.
-    const username = String($("signinUser").value || "").trim().toLowerCase();
+    let username = String($("signinUser").value || "").trim().toLowerCase();
+    // Accept either "coach" or the full "coach@shotlist.arpithbinsa.com". Any other domain is rejected.
+    if (username.includes("@")) {
+      const at = username.lastIndexOf("@");
+      if (username.slice(at + 1) !== USERNAME_DOMAIN) { signinError("Just type your username, for example \u201ccoach\u201d."); return; }
+      username = username.slice(0, at);
+    }
     const password = String($("signinPass").value || "");
     if (!USERNAME_RE.test(username)) { signinError("Usernames are 3\u201324 characters: letters, numbers, dots, dashes or underscores."); return; }
     if (password.length < PASSWORD_MIN || password.length > PASSWORD_MAX) { signinError("Password must be " + PASSWORD_MIN + "\u2013" + PASSWORD_MAX + " characters."); return; }

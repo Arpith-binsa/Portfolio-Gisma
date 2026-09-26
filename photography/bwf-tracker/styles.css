@@ -1040,6 +1040,12 @@ body:not([data-screen="app"]) .account {
   color: var(--primary);
 }
 
+.field-hint {
+  margin: -8px 16px 0;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+}
+
 .signin-error {
   padding: 10px 14px;
   border-radius: var(--r-s);

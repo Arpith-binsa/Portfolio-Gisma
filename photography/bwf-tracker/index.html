@@ -49,8 +49,9 @@
         <label class="field">
           <span>Username</span>
           <input id="signinUser" name="username" type="text" autocomplete="username" autocapitalize="none"
-            autocorrect="off" spellcheck="false" inputmode="text" maxlength="24" required>
+            autocorrect="off" spellcheck="false" inputmode="text" maxlength="60" required aria-describedby="userHint">
         </label>
+        <p class="field-hint" id="userHint">Just your username, for example coach</p>
         <label class="field">
           <span>Password</span>
           <input id="signinPass" name="password" type="password" autocomplete="current-password" maxlength="128"
