@@ -64,6 +64,21 @@
   padding: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* never scroll sideways (on html only, so the sticky bar keeps working) */
+@supports (overflow: clip) {
+  html {
+    overflow-x: clip;
+  }
+}
+
 html {
   scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 150px);
   -webkit-text-size-adjust: 100%;

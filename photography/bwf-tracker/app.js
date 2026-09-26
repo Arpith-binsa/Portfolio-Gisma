@@ -209,8 +209,14 @@
   let auth = null;
   let playersRef = null, connectedRef = null;
 
-  function showScreen(which) {             // "app" | "signin"
+  function showScreen(which) {             // "app" | "signin" | "loading"
     document.body.dataset.screen = which;
+    // Also toggle the hidden attribute, so the right screen shows even if the stylesheet is missing or old.
+    $("signin").hidden = which !== "signin";
+    for (const sel of [".masthead", ".toolbar", "main"]) {
+      const n = document.querySelector(sel);
+      if (n) n.hidden = which !== "app";
+    }
   }
 
   // Client-side login rate limit: after 3 failed tries, wait 15 s, then 30 s, 60 s … (max 15 min).
